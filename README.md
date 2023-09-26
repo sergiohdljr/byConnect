@@ -5,6 +5,7 @@ linha do tempo de uma rede social. Desde a estrutura base da timeline (toolbar, 
 etc) até as publicações, com a possibilidade de o usuário adicionar, remover e editar essas
 postagens.
 
+Requisitos: 
 - [ ] Ter criado a tela de linha do tempo da rede social;
 - [ ] Existir a possibilidade de criar uma nova publicação;
 - [ ] Existir a possibilidade de editar uma publicação;

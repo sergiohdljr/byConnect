@@ -9,6 +9,7 @@
               @Post="Publicar"
               :user-profile="user.fotoPerfil"
             />
+            <PostComponent></PostComponent>
           </v-col>
         </v-row>
       </v-container>
@@ -19,11 +20,12 @@
 <script>
 import ToolbarComponent from "./components/ToolbarComponent.vue";
 import FormPostComponent from "./components/FormPostComponent.vue";
+import PostComponent from "./components/PostComponent.vue";
 
 export default {
   name: "App",
 
-  components: { ToolbarComponent, FormPostComponent },
+  components: { ToolbarComponent, FormPostComponent, PostComponent },
 
   data() {
     const user = {

@@ -1,9 +1,6 @@
 <template>
   <div class="formPost">
-    <v-avatar size="40px">
-      <img alt="Avatar" :src="userProfile" />
-    </v-avatar>
-    <v-form class="form-width">
+    <v-form outlined class="form-width">
       <v-textarea v-model="text" counter label="What's Up?"></v-textarea>
       <v-btn
         depressed
@@ -48,8 +45,10 @@ export default {
 
 <style>
 .formPost {
+  border: 1px #ffffff solid;
   width: 100%;
   display: flex;
+  margin-bottom: 1rem;
 }
 
 .form-width {

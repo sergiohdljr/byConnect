@@ -31,8 +31,8 @@
           <v-list-item-title>@{{ postData.user.username }}</v-list-item-title>
         </v-list-item-content>
         <v-row align="center" justify="end">
-          <EditDialogComponent></EditDialogComponent>
-          <DeleteDialog @delete-post="deletePost(postData.id)"></DeleteDialog>
+          <EditDialogComponent @editar-post="EditarPost" />
+          <DeleteDialog @delete-post="deletePost(postData.id)" />
         </v-row>
       </v-list-item>
     </v-card-actions>
@@ -48,9 +48,15 @@ export default {
   props: {
     postData: Object,
     deletePost: Function,
+    editPost: Function,
   },
   data() {
     return {};
+  },
+  methods: {
+    EditarPost(novoTexto) {
+      this.editPost(this.postData.id, novoTexto);
+    },
   },
 };
 </script>

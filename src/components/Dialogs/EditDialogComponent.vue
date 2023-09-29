@@ -11,7 +11,11 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-textarea counter label="Edite o texto do seu post"></v-textarea>
+          <v-textarea
+            counter
+            label="Edite o texto do seu post"
+            v-model="novoTexto"
+          ></v-textarea>
         </v-container>
       </v-card-text>
       <v-card-actions>
@@ -19,7 +23,12 @@
         <v-btn color="red darken-1" text @click="dialog = false">
           Cancelar
         </v-btn>
-        <v-btn color="green darken-1" text @click="dialog = false">
+        <v-btn
+          color="green darken-1"
+          :disabled="novoTexto.length === 0"
+          text
+          @click="EditarPost(novoTexto)"
+        >
           Salvar
         </v-btn>
       </v-card-actions>
@@ -32,7 +41,14 @@ export default {
   data() {
     return {
       dialog: false,
+      novoTexto: "",
     };
+  },
+  methods: {
+    EditarPost(novoTexto) {
+      this.$emit("editar-post", novoTexto);
+      this.dialog = false;
+    },
   },
 };
 </script>

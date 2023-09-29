@@ -15,6 +15,7 @@
                 :post-data="publi"
                 :key="index"
                 :delete-post="DeletePost"
+                :edit-post="EditPost"
               />
             </v-container>
           </v-col>
@@ -55,10 +56,14 @@ export default {
         user: this.user,
       };
       this.feed.push(NovaPublicacao);
-      console.log(this.feed);
     },
     DeletePost(id) {
-      this.feed = this.feed.filter((post) => !post.id === id);
+      this.feed = this.feed.filter((post) => post.id !== id);
+    },
+    EditPost(id, novoTexto) {
+      const post = this.feed.find((post) => post.id === id);
+      post.texto = novoTexto;
+      console.log("passou");
     },
   },
 };

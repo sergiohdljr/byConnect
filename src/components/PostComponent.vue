@@ -32,7 +32,7 @@
         </v-list-item-content>
         <v-row align="center" justify="end">
           <EditDialogComponent></EditDialogComponent>
-          <DeleteDialog></DeleteDialog>
+          <DeleteDialog @delete-post="deletePost(postData.id)"></DeleteDialog>
         </v-row>
       </v-list-item>
     </v-card-actions>
@@ -47,6 +47,7 @@ export default {
   components: { EditDialogComponent, DeleteDialog },
   props: {
     postData: Object,
+    deletePost: Function,
   },
   data() {
     return {};

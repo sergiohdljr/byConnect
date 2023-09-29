@@ -14,6 +14,7 @@
                 v-for="(publi, index) in feed"
                 :post-data="publi"
                 :key="index"
+                :delete-post="DeletePost"
               />
             </v-container>
           </v-col>
@@ -47,6 +48,7 @@ export default {
   methods: {
     Publicar(dados) {
       const NovaPublicacao = {
+        id: Math.random(),
         texto: dados,
         foto: "",
         datetime: new Date(),
@@ -54,6 +56,9 @@ export default {
       };
       this.feed.push(NovaPublicacao);
       console.log(this.feed);
+    },
+    DeletePost(id) {
+      this.feed = this.feed.filter((post) => !post.id === id);
     },
   },
 };

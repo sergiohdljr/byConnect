@@ -9,7 +9,13 @@
               @Post="Publicar"
               :user-profile="user.fotoPerfil"
             />
-            <PostComponent></PostComponent>
+            <v-container fluid>
+              <PostComponent
+                v-for="(publi, index) in feed"
+                :post-data="publi"
+                :key="index"
+              />
+            </v-container>
           </v-col>
         </v-row>
       </v-container>
@@ -47,7 +53,7 @@ export default {
         user: this.user,
       };
       this.feed.push(NovaPublicacao);
-      console.log(NovaPublicacao);
+      console.log(this.feed);
     },
   },
 };

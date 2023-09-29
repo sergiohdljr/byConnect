@@ -28,18 +28,29 @@
             src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
           ></v-img>
         </v-list-item-avatar>
-
         <v-list-item-content>
           <v-list-item-title class="h1">Evan You</v-list-item-title>
           <v-list-item-title>@EvanYou</v-list-item-title>
         </v-list-item-content>
+        <v-row align="center" justify="end">
+          <EditDialogComponent></EditDialogComponent>
+          <DeleteDialog></DeleteDialog>
+        </v-row>
       </v-list-item>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-export default {};
+import EditDialogComponent from "./Dialogs/EditDialogComponent";
+import DeleteDialog from "./Dialogs/DeleteDialog";
+
+export default {
+  components: { EditDialogComponent, DeleteDialog },
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style></style>

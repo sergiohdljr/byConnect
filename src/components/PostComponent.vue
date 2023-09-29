@@ -1,12 +1,15 @@
 <template>
-  <v-card class="mx-auto" outlined width="100%">
+  <v-card class="mx-auto" outlined width="100%" style="margin-bottom: 1rem">
     <v-card-title>
-      <span class="subtitle-1">{{ postData.datetime }}</span>
+      <span class="subtitle-1 grey-lighten-3--text">{{
+        formatarDataAndHour
+      }}</span>
     </v-card-title>
-
-    <v-card-text class="subtitle-1">
-      <p>{{ postData.texto }}</p>
-    </v-card-text>
+    <v-card-title>
+      <span style="hyphens: auto" class="h-6 font-weight-regular">{{
+        postData.texto
+      }}</span>
+    </v-card-title>
     <v-list-item v-if="postData.foto.lenght === 0">
       <v-img
         v-if="postData.foto.lenght === 0"
@@ -52,6 +55,15 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    formatarDataAndHour() {
+      const data = this.postData.datetime;
+      const horas = String(data.getHours()).padStart(2, "0");
+      const minutos = String(data.getMinutes()).padStart(2, "0");
+
+      return `${horas}:${minutos}`;
+    },
   },
   methods: {
     EditarPost(novoTexto) {

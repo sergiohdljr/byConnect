@@ -63,7 +63,7 @@ export default {
     EditPost(id, novoTexto) {
       const post = this.feed.find((post) => post.id === id);
       post.texto = novoTexto;
-      console.log("passou");
+      console.log(novoTexto);
     },
   },
 };

@@ -6,17 +6,17 @@ etc) até as publicações, com a possibilidade de o usuário adicionar, remover
 postagens.
 
 Requisitos: 
-- [ ] Ter criado a tela de linha do tempo da rede social;
-- [ ] Existir a possibilidade de criar uma nova publicação;
-- [ ] Existir a possibilidade de editar uma publicação;
-- [ ] Existir a possibilidade de remover uma publicação;
-- [ ] As publicações podem consistir apenas de texto, apenas de imagens ou de ambos;
-- [ ] Utilizar dados computados (Computed) ao menos uma vez;
-- [ ] Existir um componente que representa uma publicação (por exemplo: PostComponent.vue)
-- [ ]  Ter utilizado props;
+- [x] Ter criado a tela de linha do tempo da rede social;
+- [x] Existir a possibilidade de criar uma nova publicação;
+- [x] Existir a possibilidade de editar uma publicação;
+- [x] Existir a possibilidade de remover uma publicação;
+- [x] As publicações podem consistir apenas de texto, apenas de imagens ou de ambos;
+- [x] Utilizar dados computados (Computed) ao menos uma vez;
+- [x] Existir um componente que representa uma publicação (por exemplo: PostComponent.vue)
+- [x] Ter utilizado props;
 - [ ] Ter criado uma v-app-bar da rede social contendo um botão para apagar todas as publicações
-- [ ] linha do tempo;
-- [ ] Esse botão deve estar em um componente separado da linha do tempo (para fins de prática
+- [x] linha do tempo;
+- [x] Esse botão deve estar em um componente separado da linha do tempo (para fins de prática
 de componentização);
 
 ## Como rodar o projeto localmente: 

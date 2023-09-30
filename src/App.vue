@@ -9,7 +9,7 @@
               @Post="Publicar"
               :user-profile="user.fotoPerfil"
             />
-            <v-container fluid>
+            <v-container fluid v-if="feed.length > 0">
               <PostComponent
                 v-for="(publi, index) in feed"
                 :post-data="publi"
@@ -18,6 +18,7 @@
                 :edit-post="EditPost"
               />
             </v-container>
+            <NoPostComponent v-else />
           </v-col>
         </v-row>
       </v-container>
@@ -29,11 +30,17 @@
 import ToolbarComponent from "./components/ToolbarComponent.vue";
 import FormPostComponent from "./components/FormPostComponent.vue";
 import PostComponent from "./components/PostComponent.vue";
+import NoPostComponent from "./components/NoPostComponet.vue";
 
 export default {
   name: "App",
 
-  components: { ToolbarComponent, FormPostComponent, PostComponent },
+  components: {
+    ToolbarComponent,
+    FormPostComponent,
+    PostComponent,
+    NoPostComponent,
+  },
 
   data() {
     const user = {

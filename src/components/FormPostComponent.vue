@@ -2,6 +2,13 @@
   <div class="formPost">
     <v-form outlined class="form-width">
       <v-textarea v-model="text" counter label="What's Up?"></v-textarea>
+      <v-file-input
+        label="adicione uma foto"
+        accept="image/png, image/jpeg, image/bmp"
+        filled
+        prepend-icon="mdi-camera"
+        v-model="image"
+      ></v-file-input>
       <v-btn
         depressed
         color="primary"
@@ -24,20 +31,30 @@ export default {
   data() {
     return {
       text: "",
+      image: null,
     };
   },
   computed: {
     checkInput() {
-      return this.text.length === 0 ? true : false;
+      const imagem = this.image;
+      const texto = this.text;
+      return imagem || texto.length > 0 ? false : true;
     },
   },
   methods: {
     sendPost() {
-      if (this.text.length === 0) {
-        return;
-      } else {
-        this.$emit("Post", this.text);
+      const leitor = new FileReader();
+      const imagem = this.image;
+      if (!imagem) {
+        this.$emit("Post", { texto: this.text });
         this.text = "";
+      } else {
+        leitor.readAsDataURL(imagem);
+        leitor.onload = () => {
+          this.image = leitor.result;
+          this.$emit("Post", { texto: this.text, img: this.image });
+          this.text = "";
+        };
       }
     },
   },

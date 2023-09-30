@@ -5,17 +5,16 @@
         formatarDataAndHour
       }}</span>
     </v-card-title>
-    <v-card-title>
-      <span style="hyphens: auto" class="h-6 font-weight-regular">{{
-        postData.texto
-      }}</span>
+    <v-card-title v-if="postData.texto.length > 0">
+      <span
+        v-if="postData.texto.length > 0"
+        style="hyphens: auto"
+        class="h-6 font-weight-regular"
+        >{{ postData.texto }}</span
+      >
     </v-card-title>
-    <v-list-item v-if="postData.foto.lenght === 0">
-      <v-img
-        v-if="postData.foto.lenght === 0"
-        width="100%"
-        :src="postData.foto"
-      ></v-img>
+    <v-list-item v-if="postData.foto">
+      <v-img v-if="postData.foto" width="100%" :src="postData.foto"></v-img>
     </v-list-item>
 
     <v-card-actions>

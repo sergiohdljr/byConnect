@@ -57,12 +57,13 @@ export default {
     Publicar(dados) {
       const NovaPublicacao = {
         id: Math.random(),
-        texto: dados,
-        foto: "",
+        texto: dados.texto,
+        foto: dados.img,
         datetime: new Date(),
         user: this.user,
       };
       this.feed.push(NovaPublicacao);
+      console.log(NovaPublicacao);
     },
     DeletePost(id) {
       this.feed = this.feed.filter((post) => post.id !== id);

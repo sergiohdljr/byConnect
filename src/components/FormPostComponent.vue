@@ -54,6 +54,7 @@ export default {
           this.image = leitor.result;
           this.$emit("Post", { texto: this.text, img: this.image });
           this.text = "";
+          this.image = null;
         };
       }
     },

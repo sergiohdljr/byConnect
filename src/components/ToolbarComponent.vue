@@ -6,16 +6,20 @@
       </v-avatar>
       <p>{{ DataUser.nome }}</p>
     </div>
-    <div class="pa-2 red rounded-circle d-inline-block delete-all-button">
-      <v-icon>mdi-delete-forever-outline</v-icon>
-    </div>
+    <ButtonDeleteAll :delete-all="deleteAllPosts" />
   </v-toolbar>
 </template>
 
 <script>
+import ButtonDeleteAll from "./ButtonDeleteAll.vue";
+
 export default {
+  components: {
+    ButtonDeleteAll,
+  },
   props: {
     DataUser: Object,
+    deleteAllPosts: Function,
   },
 };
 </script>

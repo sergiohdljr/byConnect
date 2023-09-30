@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <ToolbarComponent :data-user="user" />
+      <ToolbarComponent :data-user="user" :delete-all-posts="DeleteAllPosts" />
       <v-container fluid>
         <v-row justify="center">
           <v-col cols="12" sm="11" md="8" lg="6">
@@ -63,15 +63,16 @@ export default {
         user: this.user,
       };
       this.feed.push(NovaPublicacao);
-      console.log(NovaPublicacao);
     },
     DeletePost(id) {
       this.feed = this.feed.filter((post) => post.id !== id);
     },
+    DeleteAllPosts() {
+      this.feed = [];
+    },
     EditPost(id, novoTexto) {
       const post = this.feed.find((post) => post.id === id);
       post.texto = novoTexto;
-      console.log(novoTexto);
     },
   },
 };

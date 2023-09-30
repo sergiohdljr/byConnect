@@ -8,6 +8,7 @@
         :disabled="checkInput"
         submit
         rounded
+        class="custom-transform-class text-none"
         @click="sendPost"
         >Publicar</v-btn
       >

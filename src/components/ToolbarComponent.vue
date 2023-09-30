@@ -6,6 +6,9 @@
       </v-avatar>
       <p>{{ DataUser.nome }}</p>
     </div>
+    <div class="pa-2 red rounded-circle d-inline-block delete-all-button">
+      <v-icon>mdi-delete-forever-outline</v-icon>
+    </div>
   </v-toolbar>
 </template>
 
@@ -29,5 +32,9 @@ export default {
 
 .avatar-wrapper > p {
   margin-bottom: 0;
+}
+
+.delete-all-button {
+  cursor: pointer;
 }
 </style>

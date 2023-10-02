@@ -1,9 +1,7 @@
 <template>
   <v-card class="mx-auto" outlined width="100%" style="margin-bottom: 1rem">
     <v-card-title>
-      <span class="subtitle-1 grey-lighten-3--text">{{
-        formatarDataAndHour
-      }}</span>
+      <span class="subtitle-1 light-gray">{{ formatarDataAndHour }}</span>
     </v-card-title>
     <v-card-title v-if="postData.texto.length > 0">
       <span
@@ -30,7 +28,9 @@
           <v-list-item-title class="h1">{{
             postData.user.nome
           }}</v-list-item-title>
-          <v-list-item-title>@{{ postData.user.username }}</v-list-item-title>
+          <v-list-item-title class="light-gray"
+            >@{{ postData.user.username }}</v-list-item-title
+          >
         </v-list-item-content>
         <v-row align="center" justify="end">
           <EditDialogComponent @editar-post="EditarPost" />
@@ -72,4 +72,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.light-gray {
+  color: gray !important;
+}
+</style>

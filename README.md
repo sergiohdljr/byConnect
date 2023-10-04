@@ -14,7 +14,7 @@ Requisitos:
 - [x] Utilizar dados computados (Computed) ao menos uma vez;
 - [x] Existir um componente que representa uma publicação (por exemplo: PostComponent.vue)
 - [x] Ter utilizado props;
-- [ ] Ter criado uma v-app-bar da rede social contendo um botão para apagar todas as publicações
+- [x] Ter criado uma v-app-bar da rede social contendo um botão para apagar todas as publicações
 - [x] linha do tempo;
 - [x] Esse botão deve estar em um componente separado da linha do tempo (para fins de prática
 de componentização);

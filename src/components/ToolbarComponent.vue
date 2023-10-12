@@ -6,7 +6,7 @@
           <v-icon>mdi-menu-open</v-icon>
         </v-btn>
       </div>
-      <ButtonDeleteAll :delete-all="deleteAllPosts" />
+      <ButtonDeleteAll v-if="isOnTimeline" :delete-all="deleteAllPosts" />
     </v-toolbar>
     <v-sheet height="100%" width="344" class="overflow-hidden">
       <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -68,6 +68,11 @@ export default {
         { title: "Todos Usuários", icon: "mdi-forum" },
       ],
     };
+  },
+  computed: {
+    isOnTimeline() {
+      return this.$route.path === "/";
+    },
   },
 };
 </script>

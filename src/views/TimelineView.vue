@@ -1,22 +1,16 @@
 <template>
   <div>
-    <v-container fluid>
-      <v-row justify="center">
-        <v-col cols="12" sm="11" md="8" lg="6">
-          <FormPostComponent @Post="Publicar" :user-profile="user.fotoPerfil" />
-          <v-container fluid v-if="feed.length > 0">
-            <PostComponent
-              v-for="(publi, index) in feed"
-              :post-data="publi"
-              :key="index"
-              :delete-post="DeletePost"
-              :edit-post="EditPost"
-            />
-          </v-container>
-          <NoPostComponent v-else />
-        </v-col>
-      </v-row>
+    <FormPostComponent @Post="Publicar" :user-profile="user.fotoPerfil" />
+    <v-container fluid v-if="feed.length > 0">
+      <PostComponent
+        v-for="(publi, index) in feed"
+        :post-data="publi"
+        :key="index"
+        :delete-post="DeletePost"
+        :edit-post="EditPost"
+      />
     </v-container>
+    <NoPostComponent v-else />
   </div>
 </template>
 

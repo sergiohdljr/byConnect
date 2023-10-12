@@ -3,12 +3,15 @@
     <v-list-item three-line>
       <v-list-item-content>
         <v-list-item-title class="text-h5 mb-1">
-          Nome <v-icon>mdi-eye-off</v-icon> <v-icon>mdi-eye</v-icon>
-          <div class="text-overline mb-4">@username</div>
+          {{ userData.nome }}
+          <v-icon>{{ isPrivate }}</v-icon>
+          <div class="text-overline mb-4">@{{ userData.username }}</div>
         </v-list-item-title>
       </v-list-item-content>
 
-      <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+      <v-list-item-avatar tile size="100" color="grey">
+        <img :src="userData.fotoPerfil" :alt="`Perfil ${userData.nome}`" />
+      </v-list-item-avatar>
     </v-list-item>
 
     <v-card-actions>
@@ -16,3 +19,15 @@
     </v-card-actions>
   </v-card>
 </template>
+<script>
+export default {
+  props: {
+    userData: Object,
+  },
+  computed: {
+    isPrivate() {
+      return this.userData.privateProfile === true ? "mdi-eye-off" : "mdi-eye";
+    },
+  },
+};
+</script>

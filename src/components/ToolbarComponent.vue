@@ -23,13 +23,24 @@
         <v-divider></v-divider>
 
         <v-list dense>
-          <v-list-item v-for="item in items" :key="item.title" link>
+          <v-list-item link>
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <router-link to="/">Timeline</router-link>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list dense>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-account-group</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <router-link to="/AllUsers">Todos Usuários</router-link>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -53,8 +64,8 @@ export default {
     return {
       drawer: null,
       items: [
-        { title: "Home", icon: "mdi-view-dashboard" },
-        { title: "About", icon: "mdi-forum" },
+        { title: "Time Line", icon: "mdi-view-dashboard" },
+        { title: "Todos Usuários", icon: "mdi-forum" },
       ],
     };
   },

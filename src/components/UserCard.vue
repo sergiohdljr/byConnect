@@ -63,6 +63,8 @@ export default {
     handleNavigation(username) {
       if (!this.isOnUserProfile) {
         this.$router.push(`/User-profile/${username}`);
+      } else {
+        this.$router.push(`/Posts/${username}`);
       }
     },
   },

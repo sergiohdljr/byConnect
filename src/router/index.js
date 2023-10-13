@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import TimelineVue from "../views/TimelineView.vue";
 import Users from "../views/UsersView.vue";
 import UserProfile from "../views/UserProfileView.vue";
+import PostsView from "../views/PostsView.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/User-profile/:username",
     name: "UserProfile",
     component: UserProfile,
+  },
+  {
+    path: "/Posts/:username",
+    name: "Posts",
+    component: PostsView,
   },
 ];
 

@@ -62,6 +62,9 @@ export default {
   },
   data() {
     return {
+      CurrentPath: this.$route.path,
+      userProfilePath: "/User-profile/",
+      username: this.$route.params.username,
       drawer: null,
       items: [
         { title: "Time Line", icon: "mdi-view-dashboard" },
@@ -71,7 +74,7 @@ export default {
   },
   computed: {
     isOnTimeline() {
-      return this.$route.path === "/";
+      return this.CurrentPath === "/";
     },
   },
 };

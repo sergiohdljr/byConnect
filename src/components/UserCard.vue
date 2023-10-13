@@ -4,7 +4,7 @@
       <v-list-item-content>
         <v-list-item-title class="text-h5 mb-1">
           {{ userData.nome }}
-          <v-icon>{{ isPrivate }}</v-icon>
+          <v-icon>{{ privateIcon }}</v-icon>
           <div class="text-overline mb-4">@{{ userData.username }}</div>
         </v-list-item-title>
       </v-list-item-content>
@@ -15,18 +15,71 @@
     </v-list-item>
 
     <v-card-actions>
-      <v-btn outlined rounded text>visualizar perfil de Usuário </v-btn>
+      <v-btn
+        outlined
+        rounded
+        text
+        :disabled="isPrivate"
+        @click="handleNavigation(userData.username)"
+        >{{ buttonTitle }}
+      </v-btn>
     </v-card-actions>
+    <div v-if="isOnUserProfile" class="pa-4">
+      <h3>Informações do usuário:</h3>
+      <v-divider></v-divider>
+      <v-chip-group active-class="primary--text" column>
+        <v-chip>
+          {{ userData.age }}
+        </v-chip>
+        <v-chip>
+          {{ userData.endereco }}
+        </v-chip>
+        <v-chip>
+          {{ userData.email }}
+        </v-chip>
+        <v-chip>
+          {{ userData.numberOfPosts }}
+        </v-chip>
+        <v-chip> Perfil Público </v-chip>
+      </v-chip-group>
+    </div>
   </v-card>
 </template>
 <script>
 export default {
+  data() {
+    const path = this.$route.path.toLocaleLowerCase();
+    const actualPath =
+      `/User-profile/${this.userData.username}`.toLocaleLowerCase();
+    return {
+      path,
+      actualPath,
+    };
+  },
   props: {
     userData: Object,
   },
+  methods: {
+    handleNavigation(username) {
+      if (!this.isOnUserProfile) {
+        this.$router.push(`/User-profile/${username}`);
+      }
+    },
+  },
   computed: {
     isPrivate() {
-      return this.userData.privateProfile === true ? "mdi-eye-off" : "mdi-eye";
+      return this.userData.privateProfile;
+    },
+    privateIcon() {
+      return this.userData.privateProfile ? "mdi-eye-off" : "mdi-eye";
+    },
+    isOnUserProfile() {
+      return this.path === this.actualPath;
+    },
+    buttonTitle() {
+      return this.isOnUserProfile
+        ? "Ver Postagens do usuário"
+        : "visualizar perfil de Usuário";
     },
   },
 };

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import TimelineVue from "../views/TimelineView.vue";
-import AllUsers from "../views/AllUsersView.vue";
+import Users from "../views/UsersView.vue";
 
 Vue.use(VueRouter);
 
@@ -12,9 +12,9 @@ const routes = [
     component: TimelineVue,
   },
   {
-    path: "/AllUsers",
-    name: "AllUsers",
-    component: AllUsers,
+    path: "/Users",
+    name: "Users",
+    component: Users,
   },
 ];
 

@@ -40,7 +40,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <router-link to="/AllUsers">Todos Usuários</router-link>
+              <router-link to="/Users">Todos Usuários</router-link>
             </v-list-item-content>
           </v-list-item>
         </v-list>

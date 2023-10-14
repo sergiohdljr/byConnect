@@ -22,25 +22,14 @@
 
         <v-divider></v-divider>
 
-        <v-list dense>
+        <v-list v-for="(item, index) in items" :key="index" dense>
           <v-list-item link>
             <v-list-item-icon>
-              <v-icon>mdi-view-dashboard</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <router-link to="/">Timeline</router-link>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-        <v-list dense>
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon>mdi-account-group</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <router-link to="/Users">Todos Usuários</router-link>
+              <router-link :to="item.redirect">{{ item.title }}</router-link>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -67,8 +56,13 @@ export default {
       username: this.$route.params.username,
       drawer: null,
       items: [
-        { title: "Time Line", icon: "mdi-view-dashboard" },
-        { title: "Todos Usuários", icon: "mdi-forum" },
+        { title: "Time Line", icon: "mdi-view-dashboard", redirect: "/" },
+        { title: "Todos Usuários", icon: "mdi-forum", redirect: "/Users" },
+        {
+          title: "Perfil",
+          icon: "mdi-account",
+          redirect: `${this.userProfilePath}/${this.DataUser.username}`,
+        },
       ],
     };
   },

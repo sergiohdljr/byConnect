@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import ButtonDeleteAll from "./ButtonDeleteAll.vue";
+import ButtonDeleteAll from "../ButtonDeleteAll.vue";
 
 export default {
   components: {

@@ -13,7 +13,7 @@
   </v-app>
 </template>
 <script>
-import NavBarComponent from "./components/NavBarComponent.vue";
+import NavBarComponent from "./components/Navigation/NavBarComponent.vue";
 
 export default {
   components: {

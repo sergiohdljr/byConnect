@@ -1,5 +1,13 @@
 <template>
   <div>
+    <v-form class="form-search" @submit.prevent="searchUser">
+      <v-text-field
+        v-model="searchValue"
+        label="Busque um usuário"
+        required
+      ></v-text-field>
+      <v-btn type="submit"> Buscar </v-btn>
+    </v-form>
     <h2 v-if="!searchQuery">todos os usuários:</h2>
     <h2 v-else>
       Usuários que correspondem a sua busca por: "{{ searchQuery }}"
@@ -26,6 +34,7 @@ export default {
     return {
       users,
       searchQuery,
+      searchValue: "",
     };
   },
   computed: {
@@ -38,6 +47,15 @@ export default {
         );
         return userFilterBySearchQuery;
       }
+    },
+    currentPath() {
+      return this.$route.path.startsWith("/Users?=search");
+    },
+  },
+  methods: {
+    searchUser() {
+      this.$router.push(`/Users?search=${this.searchValue}`);
+      location.reload();
     },
   },
 };
@@ -56,5 +74,14 @@ export default {
 h2 {
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.form-search {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 </style>

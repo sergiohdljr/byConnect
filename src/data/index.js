@@ -9,6 +9,32 @@ export const users = [
     endereco: "Florence, Italy",
     numberOfPosts: "Ainda não possui Postagens",
     privateProfile: false,
+    posts: [
+      {
+        id: Math.random(),
+        texto: "Wake up mr. west, mr.fresh...mr",
+        foto: "",
+        datetime: new Date(),
+        user: {
+          nome: "Kanye West",
+          username: "Yeezus",
+          fotoPerfil:
+            "https://i.pinimg.com/736x/78/01/81/780181334b1a08a75b4002dfffc9418e.jpg",
+        },
+      },
+      {
+        id: Math.random(),
+        texto: "Wake up mr. west, mr.fresh...mr",
+        foto: "",
+        datetime: new Date(),
+        user: {
+          nome: "Kanye West",
+          username: "Yeezus",
+          fotoPerfil:
+            "https://i.pinimg.com/736x/78/01/81/780181334b1a08a75b4002dfffc9418e.jpg",
+        },
+      },
+    ],
   },
   {
     nome: "Jordan Carter",

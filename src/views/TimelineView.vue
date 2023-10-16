@@ -1,16 +1,14 @@
 <template>
   <div>
     <FormPostComponent @Post="Publicar" :user-profile="user.fotoPerfil" />
-    <v-container fluid v-if="feed.length > 0">
-      <PostComponent
-        v-for="(publi, index) in feed"
-        :post-data="publi"
-        :key="index"
-        :delete-post="DeletePost"
-        :edit-post="EditPost"
-      />
-    </v-container>
-    <NoPostComponent v-else />
+    <PostComponent
+      v-for="(publi, index) in feed"
+      :post-data="publi"
+      :key="index"
+      :delete-post="DeletePost"
+      :edit-post="EditPost"
+    />
+    <NoPostComponent v-if="feed.length === 0" />
   </div>
 </template>
 

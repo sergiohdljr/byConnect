@@ -1,7 +1,11 @@
 <template>
   <div class="formPost">
     <v-form outlined class="form-width">
-      <v-textarea v-model="text" counter label="What's Up?"></v-textarea>
+      <v-textarea
+        v-model="text"
+        counter
+        label="O que está acontecendo ?"
+      ></v-textarea>
       <v-file-input
         label="adicione uma foto"
         accept="image/png, image/jpeg, image/bmp"
@@ -64,7 +68,6 @@ export default {
 
 <style>
 .formPost {
-  border: 1px #ffffff solid;
   width: 100%;
   display: flex;
   margin-bottom: 1rem;

@@ -8,8 +8,8 @@
       ></v-text-field>
       <v-btn type="submit"> Buscar </v-btn>
     </v-form>
-    <h2 v-if="!searchQuery">todos os usuários:</h2>
-    <h2 v-else>
+    <h2 class="font-weight-light" v-if="!searchQuery">todos os usuários:</h2>
+    <h2 class="font-weight-light" v-else>
       Usuários que correspondem a sua busca por: "{{ searchQuery }}"
     </h2>
     <div class="wrapper-user-cards">

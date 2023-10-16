@@ -5,7 +5,7 @@
         <v-icon>mdi-delete</v-icon>
       </v-btn>
     </template>
-    <v-card>
+    <v-card class="outlined">
       <v-card-text>
         <v-container>
           <h2>Tem certeza que deseja deletar o seu Post?</h2>
@@ -38,4 +38,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.outlined {
+  border: 0.5px #ffff solid !important;
+}
+</style>

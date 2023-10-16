@@ -5,7 +5,7 @@
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </template>
-    <v-card>
+    <v-card class="outlined">
       <v-card-title>
         <span class="text-h5">Edite o seu Post</span>
       </v-card-title>

@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     isOnTimeline() {
-      return this.CurrentPath === "/";
+      return this.$route.path === "/";
     },
   },
 };

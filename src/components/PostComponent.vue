@@ -32,7 +32,7 @@
             >@{{ postData.user.username }}</v-list-item-title
           >
         </v-list-item-content>
-        <v-row align="center" justify="end">
+        <v-row v-if="allowActions" align="center" justify="end">
           <EditDialogComponent @editar-post="EditarPost" />
           <DeleteDialog @delete-post="deletePost(postData.id)" />
         </v-row>
@@ -62,6 +62,10 @@ export default {
       const minutos = String(data.getMinutes()).padStart(2, "0");
 
       return `${horas}:${minutos}`;
+    },
+    allowActions() {
+      const currentUser = "sergiohdljr";
+      return this.postData.user.username === currentUser;
     },
   },
   methods: {

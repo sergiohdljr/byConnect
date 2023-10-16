@@ -16,6 +16,7 @@
 import FormPostComponent from "../components/FormPostComponent.vue";
 import PostComponent from "../components/PostComponent.vue";
 import NoPostComponent from "../components/NoPostComponet.vue";
+import { users } from "@/data";
 
 export default {
   components: {
@@ -30,9 +31,11 @@ export default {
       username: "sergiohdljr",
       fotoPerfil: "https://avatars.githubusercontent.com/u/102623806?v=4",
     };
+    const posts = users.map((user) => user.posts)[0];
+
     return {
       user,
-      feed: [],
+      feed: [...posts],
     };
   },
   methods: {

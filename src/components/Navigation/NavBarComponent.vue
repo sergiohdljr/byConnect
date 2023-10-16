@@ -5,6 +5,9 @@
         <v-btn @click.stop="drawer = !drawer">
           <v-icon>mdi-menu-open</v-icon>
         </v-btn>
+        <div class="swish-theme">
+          <v-switch v-model="$vuetify.theme.dark" inset></v-switch>
+        </div>
       </div>
       <ButtonDeleteAll v-if="isOnTimeline" :delete-all="deleteAllPosts" />
     </v-toolbar>
@@ -79,12 +82,19 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
 
 .delete-all-button {
   cursor: pointer;
+}
+
+.swish-theme {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
 }
 </style>

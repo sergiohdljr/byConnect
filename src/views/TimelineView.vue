@@ -31,7 +31,13 @@ export default {
       username: "sergiohdljr",
       fotoPerfil: "https://avatars.githubusercontent.com/u/102623806?v=4",
     };
-    const posts = users.map((user) => user.posts)[0];
+
+    const posts = users.reduce((posts, user) => {
+      if (user.posts) {
+        return posts.concat(user.posts);
+      }
+      return posts;
+    }, []);
 
     return {
       user,
@@ -47,7 +53,7 @@ export default {
         datetime: new Date(),
         user: this.user,
       };
-      this.feed.push(NovaPublicacao);
+      this.feed.unshift(NovaPublicacao);
     },
     DeletePost(id) {
       this.feed = this.feed.filter((post) => post.id !== id);

@@ -64,7 +64,12 @@ export default {
         {
           title: "Perfil",
           icon: "mdi-account",
-          redirect: `${this.userProfilePath}/${this.DataUser.username}`,
+          redirect: `/User-profile/${this.DataUser.username}`,
+        },
+        {
+          title: "Posts",
+          icon: "mdi-post",
+          redirect: `/Posts/${this.DataUser.username}`,
         },
       ],
     };

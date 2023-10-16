@@ -48,6 +48,16 @@ export const users = [
     privateProfile: true,
   },
   {
+    nome: "Sérgio H. de Lima Jr.",
+    username: "sergiohdljr",
+    fotoPerfil: "https://avatars.githubusercontent.com/u/102623806?v=4",
+    email: "sergio.tjf1@gmail.com",
+    age: 23,
+    endereco: "Recife, PE, Brasil",
+    numberOfPosts: "Ainda não possui Postagens",
+    privateProfile: false,
+  },
+  {
     nome: "Rosalía Vila Tobella",
     username: "Motomami",
     fotoPerfil:

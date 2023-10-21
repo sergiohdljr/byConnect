@@ -1,25 +1,21 @@
 <template>
-  <v-theme-provider root>
-    <v-app>
-      <v-main>
-        <NavBarComponent :data-user="user" :delete-all-posts="DeleteAllPosts" />
-        <v-container fluid>
-          <v-row justify="center">
-            <v-col cols="12" sm="11" md="8" lg="6">
-              <router-view></router-view>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-main>
-    </v-app>
-  </v-theme-provider>
+  <BaseLayoutApp>
+    <template v-slot:navigation>
+      <NavBarComponent :data-user="user" delete-all-posts="DeleteAllPosts" />
+    </template>
+    <template v-slot:content>
+      <router-view />
+    </template>
+  </BaseLayoutApp>
 </template>
 <script>
 import NavBarComponent from "./components/Navigation/NavBarComponent.vue";
+import BaseLayoutApp from "./layout/BaseLayoutApp.vue";
 
 export default {
   components: {
     NavBarComponent,
+    BaseLayoutApp,
   },
   data() {
     const user = {

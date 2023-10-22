@@ -1,33 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { routesViews } from "./chunks";
 
 Vue.use(VueRouter);
-
-const TimeLineView = () => import("../views/TimelineView.vue");
-const UsersView = () => import("../views/UsersView.vue");
-const UserProfileView = () => import("../views/UserProfileView.vue");
-const PostsView = () => import("../views/PostsView.vue");
 
 const routes = [
   {
     path: "/",
     name: "Timeline",
-    component: TimeLineView,
+    component: routesViews.TimeLine,
   },
   {
     path: "/Users",
     name: "Users",
-    component: UsersView,
+    component: routesViews.Users,
   },
   {
     path: "/User-profile/:username",
     name: "UserProfile",
-    component: UserProfileView,
+    component: routesViews.UserProfile,
   },
   {
     path: "/Posts/:username",
     name: "Posts",
-    component: PostsView,
+    component: routesViews.Posts,
   },
 ];
 

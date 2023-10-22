@@ -1,27 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import TimelineVue from "../views/TimelineView.vue";
-import Users from "../views/UsersView.vue";
-import UserProfile from "../views/UserProfileView.vue";
-import PostsView from "../views/PostsView.vue";
 
 Vue.use(VueRouter);
+
+const TimeLineView = () => import("../views/TimelineView.vue");
+const UsersView = () => import("../views/UsersView.vue");
+const UserProfileView = () => import("../views/UserProfileView.vue");
+const PostsView = () => import("../views/PostsView.vue");
 
 const routes = [
   {
     path: "/",
     name: "Timeline",
-    component: TimelineVue,
+    component: TimeLineView,
   },
   {
     path: "/Users",
     name: "Users",
-    component: Users,
+    component: UsersView,
   },
   {
     path: "/User-profile/:username",
     name: "UserProfile",
-    component: UserProfile,
+    component: UserProfileView,
   },
   {
     path: "/Posts/:username",

@@ -25,6 +25,16 @@ const routes = [
     name: "Posts",
     component: routesViews.Posts,
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: routesViews.Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: routesViews.Register,
+  },
 ];
 
 const router = new VueRouter({

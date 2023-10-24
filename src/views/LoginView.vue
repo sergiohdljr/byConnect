@@ -17,6 +17,7 @@
   padding: 2rem;
   border-radius: 0.6rem;
   width: 100%;
+  max-width: 750px;
   height: 500px;
   margin-top: 8rem;
   display: flex;

@@ -4,6 +4,8 @@ import { routesViews } from "./chunks";
 
 Vue.use(VueRouter);
 
+const isAuthenticated = false;
+
 const routes = [
   {
     path: "/",
@@ -41,6 +43,11 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
+  else next();
 });
 
 export default router;

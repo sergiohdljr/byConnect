@@ -6,7 +6,7 @@
       <v-text-field type="password" label="Senha" required />
     </div>
     <v-btn type="submit" color="primary text-capitalize text-subtitle-1"
-      >Registre-se</v-btn
+      >Registre</v-btn
     >
     <router-link to="/login">Login</router-link>
   </v-form>

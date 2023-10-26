@@ -1,9 +1,9 @@
 <template>
-  <v-form class="form">
+  <v-form class="form" @submit.prevent="Login">
     <h3 class="text-h4">Login</h3>
     <div>
-      <v-text-field type="email" label="E-mail" required />
-      <v-text-field type="password" label="Senha" required />
+      <v-text-field type="email" v-model="email" label="E-mail" required />
+      <v-text-field type="password" v-model="senha" label="Senha" required />
     </div>
     <div class="group-btn">
       <v-btn type="submit" color="primary text-none text-subtitle-1"
@@ -20,6 +20,34 @@
     <router-link to="/register">Registre-se</router-link>
   </v-form>
 </template>
+
+<script>
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
+
+export default {
+  data() {
+    return {
+      email: null,
+      senha: null,
+    };
+  },
+  methods: {
+    Login() {
+      signInWithEmailAndPassword(auth, this.email, this.senha)
+        .then((userCredential) => {
+          if (userCredential.user) {
+            this.$router.push("/");
+          }
+          console.log(auth.currentUser);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+  },
+};
+</script>
 
 <style>
 .form {

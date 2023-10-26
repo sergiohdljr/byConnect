@@ -1,10 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { routesViews } from "./chunks";
+import { auth } from "../config/firebase";
 
 Vue.use(VueRouter);
-
-const isAuthenticated = false;
 
 const routes = [
   {
@@ -54,7 +53,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  if (requiresAuth && !isAuthenticated) {
+  if (requiresAuth && !auth.currentUser) {
     next({ name: "Login" });
   } else {
     next();

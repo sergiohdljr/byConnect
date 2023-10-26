@@ -34,13 +34,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: routesViews.Login,
-    meta: { requiresAuth: false },
   },
   {
     path: "/register",
     name: "Register",
     component: routesViews.Register,
-    meta: { requiresAuth: false },
   },
 ];
 
@@ -51,13 +49,18 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
-  if (requiresAuth && !auth.currentUser) {
-    next({ name: "Login" });
-  } else {
-    next();
+  if (to.path === "/login" && auth.currentUser) {
+    next("/");
+    return;
   }
+  if (
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !auth.currentUser
+  ) {
+    next("login");
+    return;
+  }
+  next();
 });
 
 export default router;

@@ -32,6 +32,9 @@ export default {
       this.feed = [];
     },
   },
+  beforeMount() {
+    this.$store.dispatch("fetchUser");
+  },
 };
 </script>
 

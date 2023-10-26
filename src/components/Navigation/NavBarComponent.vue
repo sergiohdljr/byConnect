@@ -36,6 +36,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
+        <button @click="Logout">sair</button>
       </v-navigation-drawer>
     </v-sheet>
   </div>
@@ -77,6 +78,11 @@ export default {
   computed: {
     isOnTimeline() {
       return this.$route.path === "/";
+    },
+  },
+  methods: {
+    Logout() {
+      this.$store.dispatch("logout");
     },
   },
 };

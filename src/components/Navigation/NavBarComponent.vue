@@ -36,7 +36,12 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <button @click="Logout">sair</button>
+        <v-list class="logout-btn">
+          <button @click="Logout">
+            <v-icon>mdi-logout</v-icon>
+            <p>Sair</p>
+          </button>
+        </v-list>
       </v-navigation-drawer>
     </v-sheet>
   </div>
@@ -107,5 +112,17 @@ export default {
   height: 100%;
   align-items: flex-end;
   justify-content: center;
+}
+
+.logout-btn {
+  padding: 0 16px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn > button {
+  display: flex;
+  gap: 2rem;
 }
 </style>

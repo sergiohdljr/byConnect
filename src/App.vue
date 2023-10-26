@@ -32,7 +32,7 @@ export default {
       this.feed = [];
     },
   },
-  beforeMount() {
+  beforeCreate() {
     this.$store.dispatch("fetchUser");
   },
 };

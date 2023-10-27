@@ -55,10 +55,6 @@ export default {
 
           if (router.currentRoute.path === "/login") {
             router.push("/");
-            console.log("tutut");
-          } else {
-            const currentPath = router.currentRoute.path;
-            router.push(currentPath);
           }
         }
       });

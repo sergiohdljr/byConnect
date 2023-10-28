@@ -4,7 +4,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, googleProvider } from "@/config/firebase";
+import { auth, githubProvider, googleProvider } from "@/config/firebase";
 import router from "../router/index";
 
 export default {
@@ -41,7 +41,17 @@ export default {
       }
 
       commit("SET_USER", auth.currentUser);
-      console.log(auth.currentUser);
+    },
+
+    async githubSignIn({ commit }) {
+      try {
+        await signInWithPopup(auth, githubProvider);
+      } catch (error) {
+        console.log(error.message);
+        return;
+      }
+
+      commit("SET_USER", auth.currentUser);
     },
 
     async register(details) {

@@ -14,16 +14,19 @@
       <v-btn
         :loading="loading.emailSenha"
         color="primary text-none text-subtitle-1"
-        @click="Login"
+        @click="login"
         >Login</v-btn
       >
       <v-btn
         :loading="loading.google"
         color="primary text-none text-subtitle-1"
-        @click="SignGoogle"
+        @click="signGoogle"
         >Entrar com Google<v-icon class="ml-2">mdi-google</v-icon></v-btn
       >
-      <v-btn type="submit" color="primary text-none text-subtitle-1"
+      <v-btn
+        :loading="loading.github"
+        color="primary text-none text-subtitle-1"
+        @click="signGithub"
         >Entrar com Github<v-icon class="ml-2">mdi-github</v-icon></v-btn
       >
     </div>
@@ -40,22 +43,30 @@ export default {
       loading: {
         emailSenha: false,
         google: false,
+        github: false,
       },
     };
   },
   methods: {
-    Login() {
+    login() {
       this.loading.emailSenha = true;
       setTimeout(() => {
         this.$store.dispatch("login", this.user);
         this.loading.emailSenha = false;
       }, 2000);
     },
-    SignGoogle() {
+    signGoogle() {
       this.loading.google = true;
       setTimeout(() => {
         this.$store.dispatch("googleSignIn");
         this.loading.google = false;
+      }, 2000);
+    },
+    signGithub() {
+      this.loading.github = true;
+      setTimeout(() => {
+        this.$store.dispatch("githubSignIn");
+        this.loading.github = false;
       }, 2000);
     },
   },

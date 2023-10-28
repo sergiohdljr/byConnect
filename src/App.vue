@@ -1,7 +1,7 @@
 <template>
   <BaseLayoutApp>
     <template v-slot:navigation>
-      <NavBarComponent :data-user="user" delete-all-posts="DeleteAllPosts" />
+      <NavBarComponent :user="user" delete-all-posts="DeleteAllPosts" />
     </template>
     <template v-slot:content>
       <router-view />
@@ -11,6 +11,7 @@
 <script>
 import NavBarComponent from "./components/Navigation/NavBarComponent.vue";
 import BaseLayoutApp from "./layout/BaseLayoutApp.vue";
+import { auth } from "./config/firebase";
 
 export default {
   components: {
@@ -18,13 +19,12 @@ export default {
     BaseLayoutApp,
   },
   data() {
-    const user = {
-      nome: "Sérgio H. de Lima Jr.",
-      username: "sergiohdljr",
-      fotoPerfil: "https://avatars.githubusercontent.com/u/102623806?v=4",
-    };
     return {
-      user,
+      user: {
+        nome: auth.currentUser.displayName,
+        username: auth.currentUser.email,
+        fotoPerfil: auth.currentUser.photoURL,
+      },
     };
   },
   methods: {

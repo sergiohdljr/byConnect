@@ -15,11 +15,11 @@
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img :src="DataUser.fotoPerfil"></v-img>
+            <v-img :src="user.fotoPerfil"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ DataUser.nome }}</v-list-item-title>
+            <v-list-item-title>{{ user.nome }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -55,13 +55,11 @@ export default {
     ButtonDeleteAll,
   },
   props: {
-    DataUser: Object,
+    user: Object,
     deleteAllPosts: Function,
   },
   data() {
     return {
-      CurrentPath: this.$route.path,
-      userProfilePath: "/User-profile/",
       username: this.$route.params.username,
       drawer: null,
       items: [
@@ -70,12 +68,12 @@ export default {
         {
           title: "Perfil",
           icon: "mdi-account",
-          redirect: `/User-profile/${this.DataUser.username}`,
+          redirect: `/User-profile/${this.user.username}`,
         },
         {
           title: "Posts",
           icon: "mdi-post",
-          redirect: `/Posts/${this.DataUser.username}`,
+          redirect: `/Posts/${this.user.username}`,
         },
       ],
     };

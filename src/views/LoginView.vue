@@ -11,7 +11,10 @@
       />
     </div>
     <div class="group-btn">
-      <v-btn type="submit" color="primary text-none text-subtitle-1"
+      <v-btn
+        type="submit"
+        :loading="loading"
+        color="primary text-none text-subtitle-1"
         >Login</v-btn
       >
       <v-btn type="submit" color="primary text-none text-subtitle-1"
@@ -31,11 +34,16 @@ export default {
   data() {
     return {
       user: {},
+      loading: false,
     };
   },
   methods: {
     Login() {
-      this.$store.dispatch("login", this.user);
+      this.loading = true;
+      setTimeout(() => {
+        this.$store.dispatch("login", this.user);
+        this.loading = false;
+      }, 2000);
     },
   },
 };

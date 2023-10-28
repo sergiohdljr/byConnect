@@ -18,11 +18,7 @@
     <v-card-actions>
       <v-list-item class="grow">
         <v-list-item-avatar color="grey darken-3">
-          <v-img
-            class="elevation-6"
-            alt=""
-            :src="postData.user.fotoPerfil"
-          ></v-img>
+          <v-img class="elevation-6" alt="" :src="profilePic"></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="h1">{{
@@ -44,6 +40,7 @@
 <script>
 import EditDialogComponent from "./Dialogs/EditDialogComponent";
 import DeleteDialog from "./Dialogs/DeleteDialog";
+import { auth } from "@/config/firebase";
 
 export default {
   components: { EditDialogComponent, DeleteDialog },
@@ -64,8 +61,13 @@ export default {
       return `${horas}:${minutos}`;
     },
     allowActions() {
-      const currentUser = "sergiohdljr";
+      const currentUser = auth.currentUser.email;
       return this.postData.user.username === currentUser;
+    },
+    profilePic() {
+      return this.postData.user.fotoPerfil
+        ? this.postData.user.fotoPerfil
+        : "https://cpsfoundation.org/wp-content/uploads/headshot-white.png";
     },
   },
   methods: {

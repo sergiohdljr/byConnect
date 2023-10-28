@@ -17,6 +17,7 @@ import FormPostComponent from "../components/FormPostComponent.vue";
 import PostComponent from "../components/PostComponent.vue";
 import NoPostComponent from "../components/NoPostComponet.vue";
 import { users } from "@/data";
+import { auth } from "@/config/firebase";
 
 export default {
   components: {
@@ -27,9 +28,9 @@ export default {
 
   data() {
     const user = {
-      nome: "Sérgio H. de Lima Jr.",
-      username: "sergiohdljr",
-      fotoPerfil: "https://avatars.githubusercontent.com/u/102623806?v=4",
+      nome: auth.currentUser.displayName,
+      username: auth.currentUser.email,
+      fotoPerfil: auth.currentUser.photoURL,
     };
 
     const posts = users.reduce((posts, user) => {

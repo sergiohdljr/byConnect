@@ -1,5 +1,5 @@
 <template>
-  <v-form class="form" @submit.prevent="Login">
+  <v-form class="form">
     <h3 class="text-h4">Login</h3>
     <div>
       <v-text-field type="email" v-model="user.email" label="E-mail" required />
@@ -12,12 +12,15 @@
     </div>
     <div class="group-btn">
       <v-btn
-        type="submit"
-        :loading="loading"
+        :loading="loading.emailSenha"
         color="primary text-none text-subtitle-1"
+        @click="Login"
         >Login</v-btn
       >
-      <v-btn type="submit" color="primary text-none text-subtitle-1"
+      <v-btn
+        :loading="loading.google"
+        color="primary text-none text-subtitle-1"
+        @click="SignGoogle"
         >Entrar com Google<v-icon class="ml-2">mdi-google</v-icon></v-btn
       >
       <v-btn type="submit" color="primary text-none text-subtitle-1"
@@ -34,15 +37,25 @@ export default {
   data() {
     return {
       user: {},
-      loading: false,
+      loading: {
+        emailSenha: false,
+        google: false,
+      },
     };
   },
   methods: {
     Login() {
-      this.loading = true;
+      this.loading.emailSenha = true;
       setTimeout(() => {
         this.$store.dispatch("login", this.user);
-        this.loading = false;
+        this.loading.emailSenha = false;
+      }, 2000);
+    },
+    SignGoogle() {
+      this.loading.google = true;
+      setTimeout(() => {
+        this.$store.dispatch("googleSignIn");
+        this.loading.google = false;
       }, 2000);
     },
   },

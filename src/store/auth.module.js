@@ -1,9 +1,10 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { auth, googleProvider } from "@/config/firebase";
 import router from "../router/index";
 
 export default {
@@ -18,8 +19,8 @@ export default {
     },
   },
   actions: {
-    async login({ commit }, details) {
-      const { email, password } = details;
+    async login({ commit }, payload) {
+      const { email, password } = payload;
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
@@ -30,6 +31,19 @@ export default {
 
       commit("SET_USER", auth.currentUser);
     },
+
+    async googleSignIn({ commit }) {
+      try {
+        await signInWithPopup(auth, googleProvider);
+      } catch (error) {
+        console.log(error.code);
+        return;
+      }
+
+      commit("SET_USER", auth.currentUser);
+      console.log(auth.currentUser);
+    },
+
     async register(details) {
       const { email, password } = details;
       try {

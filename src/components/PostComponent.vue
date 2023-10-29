@@ -29,7 +29,7 @@
           >
         </v-list-item-content>
         <v-row v-if="allowActions" align="center" justify="end">
-          <EditDialogComponent @editar-post="EditarPost" />
+          <EditDialogComponent @editar-post="EditarPost(postData.id)" />
           <DeleteDialog @delete-post="deletePost(postData.id)" />
         </v-row>
       </v-list-item>
@@ -71,8 +71,8 @@ export default {
     },
   },
   methods: {
-    EditarPost(novoTexto) {
-      this.editPost(this.postData.id, novoTexto);
+    EditarPost(id, novoTexto) {
+      this.editPost(id, novoTexto);
     },
   },
 };

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <FormPostComponent @Post="Publicar" :user-profile="user.fotoPerfil" />
+    <FormPostComponent @Post="publicar" :user-profile="user.fotoPerfil" />
     <PostComponent
-      v-for="(publi, index) in feed"
+      v-for="(publi, index) in getAllPosts"
       :post-data="publi"
+      :delete-post="deletePost"
+      :edit-post="editPost"
       :key="index"
-      :delete-post="DeletePost"
-      :edit-post="EditPost"
     />
-    <NoPostComponent v-if="feed.length === 0" />
+    <NoPostComponent v-if="getAllPosts.length === 0" />
   </div>
 </template>
 
@@ -16,8 +16,8 @@
 import FormPostComponent from "../components/FormPostComponent.vue";
 import PostComponent from "../components/PostComponent.vue";
 import NoPostComponent from "../components/NoPostComponet.vue";
-import { users } from "@/data";
 import { auth } from "@/config/firebase";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -33,36 +33,30 @@ export default {
       fotoPerfil: auth.currentUser.photoURL,
     };
 
-    const posts = users.reduce((posts, user) => {
-      if (user.posts) {
-        return posts.concat(user.posts);
-      }
-      return posts;
-    }, []);
-
     return {
       user,
-      feed: [...posts],
     };
   },
   methods: {
-    Publicar(dados) {
-      const NovaPublicacao = {
+    publicar(dados) {
+      const novaPublicacao = {
         id: Math.random(),
         texto: dados.texto,
         foto: dados.img,
         datetime: new Date(),
         user: this.user,
       };
-      this.feed.unshift(NovaPublicacao);
+      this.$store.dispatch("post", novaPublicacao);
     },
-    DeletePost(id) {
-      this.feed = this.feed.filter((post) => post.id !== id);
+    deletePost(id) {
+      this.$store.dispatch("delete", id);
     },
-    EditPost(id, novoTexto) {
-      const post = this.feed.find((post) => post.id === id);
-      post.texto = novoTexto;
+    editPost(id, novoTexto) {
+      this.$store.dispatch("editar", id, novoTexto);
     },
+  },
+  computed: {
+    ...mapGetters(["getAllPosts"]),
   },
 };
 </script>

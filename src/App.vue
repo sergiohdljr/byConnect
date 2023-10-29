@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     DeleteAllPosts() {
-      this.feed = [];
+      this.$store.dispatch("deleteAllPosts");
     },
     waitForCurrentUser() {
       return new Promise((resolve) => {

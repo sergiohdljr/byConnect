@@ -66,11 +66,10 @@ export default {
     },
     async logout({ commit }) {
       await signOut(auth);
-
       commit("CLEAR_USER");
       router.push("/login");
     },
-    fetchUser({ commit }) {
+    async fetchUser({ commit }) {
       auth.onAuthStateChanged(async (user) => {
         if (user === null) {
           commit("CLEAR_USER");

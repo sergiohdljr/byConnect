@@ -1,7 +1,11 @@
 <template>
   <BaseLayoutApp>
     <template v-slot:navigation>
-      <NavBarComponent :user="user" :delete-all-posts="DeleteAllPosts" />
+      <NavBarComponent
+        v-if="user"
+        :user="user"
+        :delete-all-posts="DeleteAllPosts"
+      />
     </template>
     <template v-slot:content>
       <router-view />
@@ -20,20 +24,33 @@ export default {
   },
   data() {
     return {
-      user: {
-        nome: auth.currentUser.displayName,
-        username: auth.currentUser.email,
-        fotoPerfil: auth.currentUser.photoURL,
-      },
+      user: null,
     };
   },
   methods: {
     DeleteAllPosts() {
       this.feed = [];
     },
+    waitForCurrentUser() {
+      return new Promise((resolve) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            resolve(user);
+          }
+          unsubscribe();
+        });
+      });
+    },
   },
-  beforeCreate() {
-    this.$store.dispatch("fetchUser");
+  async created() {
+    await this.$store.dispatch("fetchUser");
+    await this.waitForCurrentUser();
+
+    this.user = {
+      nome: auth.currentUser.displayName,
+      username: auth.currentUser.email,
+      fotoPerfil: auth.currentUser.photoURL,
+    };
   },
 };
 </script>

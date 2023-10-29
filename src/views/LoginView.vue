@@ -1,11 +1,18 @@
 <template>
-  <v-form class="form">
+  <v-form class="form" ref="form" lazy-validation @submit.prevent="login">
     <h3 class="text-h4">Login</h3>
     <div>
-      <v-text-field type="email" v-model="user.email" label="E-mail" required />
+      <v-text-field
+        type="email"
+        v-model="user.email"
+        :rules="formRules.emailRules"
+        label="E-mail"
+        required
+      />
       <v-text-field
         type="password"
         v-model="user.password"
+        :rules="formRules.passwordRules"
         label="Senha"
         required
       />
@@ -14,7 +21,7 @@
       <v-btn
         :loading="loading.emailSenha"
         color="primary text-none text-subtitle-1"
-        @click="login"
+        type="submit"
         >Login</v-btn
       >
       <v-btn
@@ -39,6 +46,17 @@
 export default {
   data() {
     return {
+      formRules: {
+        emailRules: [
+          (email) => !!email || "Digite um E-mail",
+          (email) => /.+@.+\..+/.test(email) || "Digite um E-mail válido.",
+        ],
+        passwordRules: [
+          (senha) => !!senha || "Digite uma senha",
+          (senha) =>
+            /^.{6,}$/.test(senha) || "A senha deve ser maior que 6 caracteres.",
+        ],
+      },
       user: {},
       loading: {
         emailSenha: false,
@@ -49,11 +67,13 @@ export default {
   },
   methods: {
     login() {
-      this.loading.emailSenha = true;
-      setTimeout(() => {
-        this.$store.dispatch("login", this.user);
-        this.loading.emailSenha = false;
-      }, 2000);
+      if (this.$refs.form.validate()) {
+        this.loading.emailSenha = true;
+        setTimeout(() => {
+          this.$store.dispatch("login", this.user);
+          this.loading.emailSenha = false;
+        }, 2000);
+      }
     },
     signGoogle() {
       this.loading.google = true;

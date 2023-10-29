@@ -1,7 +1,7 @@
 <template>
   <BaseLayoutApp>
     <template v-slot:navigation>
-      <NavBarComponent :user="user" delete-all-posts="DeleteAllPosts" />
+      <NavBarComponent :user="user" :delete-all-posts="DeleteAllPosts" />
     </template>
     <template v-slot:content>
       <router-view />

@@ -15,16 +15,5 @@
   </v-theme-provider>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      Authenticated: false,
-    };
-  },
-  computed: {
-    isAuthenticated() {
-      return this.Authenticated;
-    },
-  },
-};
+export default {};
 </script>

@@ -1,6 +1,9 @@
 <template>
   <v-form class="form" ref="form" lazy-validation @submit.prevent="login">
     <h3 class="text-h4">Login</h3>
+    <v-alert v-if="loginError" outlined type="error">
+      {{ loginError }}
+    </v-alert>
     <div>
       <v-text-field
         type="email"
@@ -63,14 +66,32 @@ export default {
         google: false,
         github: false,
       },
+      errorMessage: null,
     };
   },
+  computed: {
+    loginError() {
+      return (
+        this.errorMessage === "auth/invalid-login-credentials" &&
+        "Email ou Senha incorrentos. Tente Novamente."
+      );
+    },
+  },
   methods: {
-    login() {
+    async login() {
+      if (this.errorMessage) {
+        this.errorMessage = null;
+      }
+
       if (this.$refs.form.validate()) {
         this.loading.emailSenha = true;
-        setTimeout(() => {
-          this.$store.dispatch("login", this.user);
+        setTimeout(async () => {
+          try {
+            await this.$store.dispatch("login", this.user);
+          } catch (error) {
+            this.errorMessage = error.message;
+          }
+
           this.loading.emailSenha = false;
         }, 2000);
       }

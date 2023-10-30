@@ -25,8 +25,7 @@ export default {
       try {
         await signInWithEmailAndPassword(auth, email, password);
       } catch (error) {
-        console.log(error.code);
-        return;
+        throw new Error(error.code);
       }
 
       commit("SET_USER", auth.currentUser);
@@ -36,8 +35,7 @@ export default {
       try {
         await signInWithPopup(auth, googleProvider);
       } catch (error) {
-        console.log(error.code);
-        return;
+        throw new Error(error.code);
       }
 
       commit("SET_USER", auth.currentUser);
@@ -47,21 +45,18 @@ export default {
       try {
         await signInWithPopup(auth, githubProvider);
       } catch (error) {
-        console.log(error.message);
-        return;
+        throw new Error(error.code);
       }
 
       commit("SET_USER", auth.currentUser);
     },
 
-    async register(details) {
-      const { email, password } = details;
+    async register(payload) {
+      const { email, password } = payload;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        console.log("cadastro realizado com sucesso");
       } catch (error) {
-        console.log(error.code);
-        return;
+        throw new Error(error.code);
       }
     },
     async logout({ commit }) {

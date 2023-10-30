@@ -17,6 +17,9 @@ export default {
     getAllPosts: function (state) {
       return state.feed;
     },
+    getAllUsers: function (state) {
+      return state.users;
+    },
   },
   mutations: {
     ADD_POST(state, post) {
@@ -32,6 +35,11 @@ export default {
     DELETE_ALL_POSTS(state) {
       state.feed = [];
     },
+    FILTER_USERS_LIST(state, search) {
+      state.users = state.users.filter((user) =>
+        user.username.toLowerCase().startsWith(search.toLowerCase())
+      );
+    },
   },
   actions: {
     post(context, post) {
@@ -45,6 +53,9 @@ export default {
     },
     deleteAllPosts(context) {
       context.commit("DELETE_ALL_POSTS");
+    },
+    filtrar(context, search) {
+      context.commit("FILTER_USERS_LIST", search);
     },
   },
 };

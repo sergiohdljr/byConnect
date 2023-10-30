@@ -7,23 +7,21 @@
         required
       ></v-text-field>
       <v-btn type="submit"> Buscar </v-btn>
+      <v-btn type="button" @click="limparBusca"> limpar </v-btn>
     </v-form>
     <h2 class="font-weight-light" v-if="!searchQuery">todos os usuários:</h2>
     <h2 class="font-weight-light" v-else>
       Usuários que correspondem a sua busca por: "{{ searchQuery }}"
     </h2>
     <div class="wrapper-user-cards">
-      <UserCard
-        v-for="(user, index) in searchFilter"
-        :key="index"
-        :user-data="user"
-      />
+      <UserCard v-for="(user, index) in users" :key="index" :user-data="user" />
     </div>
   </div>
 </template>
 <script>
 import UserCard from "../components/UserCard.vue";
-import { users } from "../data";
+// import { users } from "../data";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -32,22 +30,15 @@ export default {
   data() {
     const searchQuery = this.$route.query.search;
     return {
-      users,
+      users: "",
+      usersListClone: "",
       searchQuery,
       searchValue: "",
+      loadingSearch: false,
     };
   },
   computed: {
-    searchFilter() {
-      if (!this.searchQuery) {
-        return users;
-      } else {
-        const userFilterBySearchQuery = users.filter((user) =>
-          user.username.toLowerCase().startsWith(this.searchQuery.toLowerCase())
-        );
-        return userFilterBySearchQuery;
-      }
-    },
+    ...mapGetters(["getAllUsers"]),
     currentPath() {
       return this.$route.path.startsWith("/Users?=search");
     },
@@ -55,8 +46,20 @@ export default {
   methods: {
     searchUser() {
       this.$router.push(`/Users?search=${this.searchValue}`);
-      location.reload();
+      if (this.$route.query.search) {
+        this.$store.dispatch("filtrar", this.$route.query.search);
+        this.users = this.getAllUsers;
+      } else {
+        return;
+      }
     },
+    limparBusca() {
+      this.users = this.usersListClone;
+    },
+  },
+  created() {
+    this.users = this.getAllUsers;
+    this.usersListClone = this.getAllUsers;
   },
 };
 </script>

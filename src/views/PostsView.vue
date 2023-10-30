@@ -7,6 +7,8 @@
       v-for="(post, index) in posts"
       :key="index"
       :post-data="post"
+      :delete-post="deletePost"
+      :edit-post="editPost"
     />
   </div>
 </template>
@@ -24,6 +26,14 @@ export default {
       posts: "",
     };
   },
+  methods: {
+    deletePost(id) {
+      this.$store.dispatch("delete", id);
+    },
+    editPost(id, novoTexto) {
+      this.$store.dispatch("editar", id, novoTexto);
+    },
+  },
   computed: {
     ...mapGetters(["getAllPosts"]),
   },
@@ -35,7 +45,6 @@ export default {
     );
 
     this.posts = userPosts;
-    console.log(userPosts);
   },
 };
 </script>

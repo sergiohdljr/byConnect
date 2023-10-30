@@ -12,21 +12,30 @@
 </template>
 
 <script>
-import { users } from "../data";
 import PostComponent from "@/components/PostComponent.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     PostComponent,
   },
   data() {
-    const userPosts = users
-      .filter((user) => user.username === this.$route.params.username)
-      .map((user) => user.posts)[0];
-
     return {
-      posts: userPosts,
+      posts: "",
     };
+  },
+  computed: {
+    ...mapGetters(["getAllPosts"]),
+  },
+  created() {
+    this.posts = this.getAllPosts;
+
+    const userPosts = this.getAllPosts.filter(
+      (post) => post.user.username === this.$route.params.username
+    );
+
+    this.posts = userPosts;
+    console.log(userPosts);
   },
 };
 </script>

@@ -35,6 +35,9 @@ export default {
     DELETE_ALL_POSTS(state) {
       state.feed = [];
     },
+    ADD_USER(state, user) {
+      state.users.push(user);
+    },
     FILTER_USERS_LIST(state, search) {
       state.users = state.users.filter((user) =>
         user.username.toLowerCase().startsWith(search.toLowerCase())
@@ -56,6 +59,9 @@ export default {
     },
     filtrar(context, search) {
       context.commit("FILTER_USERS_LIST", search);
+    },
+    setUser(context, user) {
+      context.commit("ADD_USER", user);
     },
   },
 };

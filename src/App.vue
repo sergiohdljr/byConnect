@@ -51,6 +51,19 @@ export default {
       username: auth.currentUser.email,
       fotoPerfil: auth.currentUser.photoURL,
     };
+
+    const currentUser = {
+      nome: this.user.nome,
+      username: this.user.username,
+      fotoPerfil: this.user.fotoPerfil,
+      email: this.user.username,
+      age: "",
+      endereco: "",
+      numberOfPosts: "Ainda não possui Postagens",
+      privateProfile: auth.currentUser.isAnonymous,
+      posts: [],
+    };
+    this.$store.dispatch("setUser", currentUser);
   },
 };
 </script>

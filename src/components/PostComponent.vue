@@ -8,8 +8,8 @@
         v-if="postData.texto.length > 0"
         style="hyphens: auto"
         class="h-6 font-weight-regular"
-        >{{ postData.texto }}</span
-      >
+        >{{ postData.texto }}
+      </span>
     </v-card-title>
     <v-list-item v-if="postData.foto">
       <v-img v-if="postData.foto" width="100%" :src="postData.foto"></v-img>
@@ -40,12 +40,12 @@
 <script>
 import EditDialogComponent from "./Dialogs/EditDialogComponent";
 import DeleteDialog from "./Dialogs/DeleteDialog";
-import { auth } from "@/config/firebase";
 
 export default {
   components: { EditDialogComponent, DeleteDialog },
   props: {
     postData: Object,
+    allowActions: Boolean,
     deletePost: Function,
     editPost: Function,
   },
@@ -59,10 +59,6 @@ export default {
       const minutos = String(data.getMinutes()).padStart(2, "0");
 
       return `${horas}:${minutos}`;
-    },
-    allowActions() {
-      const currentUser = auth.currentUser.email;
-      return this.postData.user.username === currentUser;
     },
     profilePic() {
       return this.postData.user.fotoPerfil

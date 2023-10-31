@@ -70,10 +70,6 @@ export default {
           commit("CLEAR_USER");
         } else {
           commit("SET_USER", user);
-
-          if (router.currentRoute.path === "/login") {
-            router.push("/");
-          }
         }
       });
     },

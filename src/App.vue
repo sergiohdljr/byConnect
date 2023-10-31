@@ -2,7 +2,7 @@
   <BaseLayoutApp>
     <template v-slot:navigation>
       <NavBarComponent
-        v-if="user"
+        v-if="showNav"
         :user="user"
         :delete-all-posts="DeleteAllPosts"
       />
@@ -25,6 +25,8 @@ export default {
   data() {
     return {
       user: null,
+      currentUser: null,
+      showNav: false,
     };
   },
   methods: {
@@ -42,14 +44,23 @@ export default {
       });
     },
   },
+  watch: {
+    user(novoUsuario) {
+      if (novoUsuario) {
+        this.showNav = true;
+      }
+    },
+  },
   async created() {
     await this.$store.dispatch("fetchUser");
     await this.waitForCurrentUser();
 
+    this.currentUser = this.$store.state.auth.user;
+
     this.user = {
-      nome: auth.currentUser.displayName,
-      username: auth.currentUser.email,
-      fotoPerfil: auth.currentUser.photoURL,
+      nome: this.currentUser.displayName,
+      username: this.currentUser.email,
+      fotoPerfil: this.currentUser.photoURL,
     };
 
     const currentUser = {

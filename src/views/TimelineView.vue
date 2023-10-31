@@ -2,14 +2,14 @@
   <div>
     <FormPostComponent @Post="publicar" :user-profile="user.fotoPerfil" />
     <PostComponent
-      v-for="(publi, index) in posts"
+      v-for="(publi, index) in getAllPosts"
       :post-data="publi"
       :allow-actions="publi.user.username === user.username"
       :delete-post="deletePost"
       :edit-post="editPost"
       :key="index"
     />
-    <NoPostComponent />
+    <NoPostComponent v-if="getAllPosts.length === 0" />
   </div>
 </template>
 
@@ -56,9 +56,6 @@ export default {
   },
   computed: {
     ...mapGetters(["getAllPosts"]),
-  },
-  created() {
-    this.posts = this.getAllPosts;
   },
 };
 </script>

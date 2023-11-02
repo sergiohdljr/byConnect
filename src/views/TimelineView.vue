@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormPostComponent @Post="publicar" :user-profile="user.fotoPerfil" />
+    <FormPostComponent @Post="publicar" />
     <PostComponent
       v-for="(publi, index) in getAllPosts"
       :post-data="publi"

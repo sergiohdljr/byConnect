@@ -29,9 +29,6 @@
 
 <script>
 export default {
-  props: {
-    userProfile: String,
-  },
   data() {
     return {
       text: "",

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ScrollButton />
     <FormPostComponent @Post="publicar" />
     <PostComponent
       v-for="(publi, index) in getAllPosts"
@@ -19,12 +20,14 @@ import PostComponent from "../components/PostComponent.vue";
 import NoPostComponent from "../components/NoPostComponet.vue";
 import { auth } from "@/config/firebase";
 import { mapGetters } from "vuex";
+import ScrollButton from "@/components/ScrollButton.vue";
 
 export default {
   components: {
     FormPostComponent,
     PostComponent,
     NoPostComponent,
+    ScrollButton,
   },
 
   data() {

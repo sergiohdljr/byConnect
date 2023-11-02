@@ -1,15 +1,17 @@
 <template>
   <div>
     <UserCard :user-data="user" />
+    <PostDialog :user="user" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import UserCard from "@/components/UserCard.vue";
+import PostDialog from "@/components/PostDialog.vue";
 
 export default {
-  components: { UserCard },
+  components: { UserCard, PostDialog },
   data() {
     return {
       username: "",

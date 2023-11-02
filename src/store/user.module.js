@@ -28,9 +28,12 @@ export default {
     DELETE_POST(state, id) {
       state.feed = state.feed.filter((post) => post.id !== id);
     },
-    EDIT_POST(state, id, newText) {
+    EDIT_POST(state, payload) {
+      const { id, texto } = payload;
       const post = state.feed.find((post) => post.id === id);
-      post.texto = newText;
+      if (post) {
+        post.texto = texto;
+      }
     },
     DELETE_ALL_POSTS(state) {
       state.feed = [];
@@ -51,8 +54,8 @@ export default {
     delete(context, id) {
       context.commit("DELETE_POST", id);
     },
-    editar(context, id, changes) {
-      context.commit("EDIT_POST", id, changes);
+    editar(context, payload) {
+      context.commit("EDIT_POST", payload);
     },
     deleteAllPosts(context) {
       context.commit("DELETE_ALL_POSTS");

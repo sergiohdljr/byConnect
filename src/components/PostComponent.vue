@@ -3,7 +3,7 @@
     <v-card-title>
       <span class="subtitle-1 light-gray">{{ formatarDataAndHour }}</span>
     </v-card-title>
-    <v-card-title v-if="postData.texto.length > 0">
+    <v-card-title v-if="postData.texto.length > 0 || postData.texto">
       <span
         v-if="postData.texto.length > 0 || postData.texto"
         style="hyphens: auto"
@@ -34,8 +34,8 @@
           align="center"
           justify="end"
         >
-          <EditDialogComponent @editar-post="EditarPost(postData.id)" />
-          <DeleteDialog @delete-post="deletePost(postData.id)" />
+          <EditDialogComponent :postId="postData.id" />
+          <DeleteDialog :postId="postData.id" />
         </v-row>
       </v-list-item>
     </v-card-actions>
@@ -51,8 +51,6 @@ export default {
   props: {
     postData: Object,
     allowActions: Boolean,
-    deletePost: Function,
-    editPost: Function,
   },
   data() {
     return {};
@@ -69,11 +67,6 @@ export default {
       return this.postData.user.fotoPerfil
         ? this.postData.user.fotoPerfil
         : "https://cpsfoundation.org/wp-content/uploads/headshot-white.png";
-    },
-  },
-  methods: {
-    EditarPost(id, novoTexto) {
-      this.editPost(id, novoTexto);
     },
   },
 };

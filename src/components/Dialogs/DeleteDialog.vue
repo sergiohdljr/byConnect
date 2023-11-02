@@ -33,6 +33,9 @@
 
 <script>
 export default {
+  props: {
+    postId: Number,
+  },
   data() {
     return {
       dialog: false,
@@ -40,7 +43,7 @@ export default {
   },
   methods: {
     deletePost() {
-      this.$emit("delete-post");
+      this.$store.dispatch("delete", this.postId);
       this.dialog = false;
     },
   },

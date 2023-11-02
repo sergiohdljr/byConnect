@@ -21,7 +21,7 @@
           <v-textarea
             counter
             label="Edite o texto do seu post"
-            v-model="novoTexto"
+            v-model="texto"
           ></v-textarea>
         </v-container>
       </v-card-text>
@@ -32,9 +32,9 @@
         </v-btn>
         <v-btn
           color="green darken-1"
-          :disabled="novoTexto.length === 0"
+          :disabled="texto.length === 0"
           text
-          @click="EditarPost(novoTexto)"
+          @click="EditarPost"
         >
           Salvar
         </v-btn>
@@ -45,15 +45,19 @@
 
 <script>
 export default {
+  props: {
+    postId: Number,
+  },
   data() {
     return {
       dialog: false,
-      novoTexto: "",
+      texto: "",
     };
   },
   methods: {
-    EditarPost(novoTexto) {
-      this.$emit("editar-post", novoTexto);
+    EditarPost() {
+      const payload = { id: this.postId, texto: this.texto };
+      this.$store.dispatch("editar", payload);
       this.dialog = false;
     },
   },

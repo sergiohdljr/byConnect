@@ -48,23 +48,23 @@ export default {
     },
   },
   actions: {
-    post(context, post) {
-      context.commit("ADD_POST", post);
+    post({ commit }, post) {
+      commit("ADD_POST", post);
     },
-    delete(context, id) {
-      context.commit("DELETE_POST", id);
+    delete({ commit }, id) {
+      commit("DELETE_POST", id);
     },
-    editar(context, payload) {
-      context.commit("EDIT_POST", payload);
+    editar({ commit }, payload) {
+      commit("EDIT_POST", payload);
     },
-    deleteAllPosts(context) {
-      context.commit("DELETE_ALL_POSTS");
+    deleteAllPosts({ commit }) {
+      commit("DELETE_ALL_POSTS");
     },
-    filtrar(context, search) {
-      context.commit("FILTER_USERS_LIST", search);
+    filtrar({ commit }, search) {
+      commit("FILTER_USERS_LIST", search);
     },
-    setUser(context, user) {
-      context.commit("ADD_USER", user);
+    setUser({ commit }, user) {
+      commit("ADD_USER", user);
     },
   },
 };

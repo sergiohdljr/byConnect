@@ -3,6 +3,7 @@
     <v-app>
       <v-main>
         <slot v-if="$route.path !== '/login'" name="navigation"></slot>
+        <ScrollButton />
         <v-container fluid>
           <v-row justify="center">
             <v-col cols="12" sm="11" md="8" lg="6">
@@ -15,5 +16,11 @@
   </v-theme-provider>
 </template>
 <script>
-export default {};
+import ScrollButton from "../components/ScrollButton.vue";
+
+export default {
+  components: {
+    ScrollButton,
+  },
+};
 </script>

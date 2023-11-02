@@ -5,7 +5,7 @@
     </v-card-title>
     <v-card-title v-if="postData.texto.length > 0">
       <span
-        v-if="postData.texto.length > 0"
+        v-if="postData.texto.length > 0 || postData.texto"
         style="hyphens: auto"
         class="h-6 font-weight-regular"
         >{{ postData.texto }}

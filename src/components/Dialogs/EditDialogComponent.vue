@@ -1,8 +1,15 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="green" class="rounded-xxl" dark v-bind="attrs" v-on="on">
-        <v-icon>mdi-pencil</v-icon>
+      <v-btn
+        outlined
+        color="primary"
+        class="rounded-pill action-button"
+        dark
+        v-bind="attrs"
+        v-on="on"
+      >
+        <v-icon class="p-0">mdi-pencil</v-icon>
       </v-btn>
     </template>
     <v-card class="outlined">
@@ -53,4 +60,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.action-button {
+  min-width: 40px !important;
+  height: 40px !important;
+  width: 2px !important;
+}
+</style>

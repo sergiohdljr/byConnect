@@ -28,7 +28,12 @@
             >@{{ postData.user.username }}</v-list-item-title
           >
         </v-list-item-content>
-        <v-row v-if="allowActions" align="center" justify="end">
+        <v-row
+          v-if="allowActions"
+          style="height: 50px; display: flex; gap: 5px"
+          align="center"
+          justify="end"
+        >
           <EditDialogComponent @editar-post="EditarPost(postData.id)" />
           <DeleteDialog @delete-post="deletePost(postData.id)" />
         </v-row>

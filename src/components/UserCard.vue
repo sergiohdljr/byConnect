@@ -144,7 +144,6 @@ export default {
     lastLoginAt() {
       const login = parseInt(this.userData.metadata.lastLoginAt);
       const date = new Date(login);
-      console.log(date);
       const options = {
         weekday: "long",
         year: "numeric",

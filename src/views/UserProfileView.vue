@@ -27,7 +27,6 @@ export default {
       (user) => user.username.toLowerCase() === this.username.toLowerCase()
     )[0];*/
     this.user = this.$store.state.auth.user;
-    console.log(this.$store.state.auth.user);
   },
 };
 </script>

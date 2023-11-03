@@ -51,13 +51,14 @@ export default {
       commit("SET_USER", auth.currentUser);
     },
 
-    async register(payload) {
+    async register({ commit }, payload) {
       const { email, password } = payload;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
       } catch (error) {
         throw new Error(error.code);
       }
+      commit("SET_USER", auth.currentUser);
     },
     async logout({ commit }) {
       await signOut(auth);

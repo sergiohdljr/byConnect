@@ -1,20 +1,20 @@
 <template>
   <v-form class="form" ref="form" lazy-validation @submit.prevent="Register">
     <h3 class="text-h4">Registre-se</h3>
-    <v-alert v-if="loginError" outlined type="error">
-      {{ loginError }}
+    <v-alert v-if="registerError" outlined type="error">
+      {{ registerError }}
     </v-alert>
     <div>
       <v-text-field
         type="email"
-        v-model="email"
+        v-model="user.email"
         :rules="formRules.emailRules"
         label="E-mail"
         required
       />
       <v-text-field
         type="password"
-        v-model="senha"
+        v-model="user.password"
         :rules="formRules.passwordRules"
         label="Senha"
         required
@@ -24,7 +24,7 @@
       :loading="loading"
       type="submit"
       color="primary text-capitalize text-subtitle-1"
-      >Registre</v-btn
+      >Registre-se</v-btn
     >
     <router-link to="/login">Login</router-link>
   </v-form>
@@ -34,8 +34,7 @@
 export default {
   data() {
     return {
-      email: "",
-      senha: "",
+      user: {},
       loading: false,
       errorMessage: null,
       formRules: {
@@ -52,7 +51,10 @@ export default {
     };
   },
   computed: {
-    loginError() {
+    registerError() {
+      if (this.errorMessage === "auth/email-already-in-use") {
+        return "E-mail já cadastrado";
+      }
       return this.errorMessage;
     },
   },

@@ -62,7 +62,9 @@
                 <v-list-item-subtitle class="font-weight-medium">
                   <v-icon small>{{ providerIcon }}</v-icon>
                   {{
-                    userData.providerData[0].providerId
+                    userData.providerData[0].providerId === "password"
+                      ? "Email/senha"
+                      : userData.providerData[0].providerId
                   }}</v-list-item-subtitle
                 >
               </v-list-item-content>
@@ -123,8 +125,9 @@ export default {
         return "mdi-github";
       } else if (this.userData.providerData[0].providerId === "google.com") {
         return "mdi-google";
+      } else {
+        return "mdi-email-lock";
       }
-      return "";
     },
     createdAt() {
       const userCreated = parseInt(this.userData.metadata.createdAt);

@@ -32,7 +32,9 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <router-link :to="item.redirect">{{ item.title }}</router-link>
+              <router-link :to="item.redirect"
+                ><p>{{ item.title }}</p></router-link
+              >
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -74,6 +76,11 @@ export default {
           title: "Posts",
           icon: "mdi-post",
           redirect: `/Posts/${this.user.username}`,
+        },
+        {
+          title: "Configurações",
+          icon: "mdi-cog",
+          redirect: `/Configuration/${this.user.username}`,
         },
       ],
     };
@@ -122,5 +129,10 @@ export default {
 .logout-btn > button {
   display: flex;
   gap: 2rem;
+}
+
+.link-style {
+  color: white;
+  text-decoration: none !important;
 }
 </style>

@@ -8,12 +8,14 @@
       />
     </template>
     <template v-slot:content>
-      <router-view />
+      <LoadingComponent v-if="pageLoading" />
+      <router-view v-else />
     </template>
   </BaseLayoutApp>
 </template>
 <script>
 import NavBarComponent from "./components/Navigation/NavBarComponent.vue";
+import LoadingComponent from "./components/LoadingComponent.vue";
 import BaseLayoutApp from "./layout/BaseLayoutApp.vue";
 import { auth } from "./config/firebase";
 
@@ -21,12 +23,14 @@ export default {
   components: {
     NavBarComponent,
     BaseLayoutApp,
+    LoadingComponent,
   },
   data() {
     return {
       user: null,
       currentUser: null,
       showNav: false,
+      pageLoading: true,
     };
   },
   methods: {
@@ -50,6 +54,11 @@ export default {
         this.showNav = true;
       }
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.pageLoading = false;
+    }, 1200);
   },
   async created() {
     await this.$store.dispatch("fetchUser");

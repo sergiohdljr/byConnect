@@ -99,14 +99,23 @@ export default {
     signGoogle() {
       this.loading.google = true;
       setTimeout(() => {
-        this.$store.dispatch("googleSignIn");
+        try {
+          this.$store.dispatch("googleSignIn");
+        } catch (error) {
+          this.errorMessage = error.message;
+        }
         this.loading.google = false;
       }, 2000);
     },
     signGithub() {
       this.loading.github = true;
       setTimeout(() => {
-        this.$store.dispatch("githubSignIn");
+        try {
+          this.$store.dispatch("githubSignIn");
+        } catch (error) {
+          this.errorMessage = error.message;
+        }
+
         this.loading.github = false;
       }, 2000);
     },

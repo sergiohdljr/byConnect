@@ -28,11 +28,10 @@ export default {
     UserCard,
   },
   data() {
-    const searchQuery = this.$route.query.search;
     return {
       users: "",
       usersListClone: "",
-      searchQuery,
+      searchQuery: this.$route.query.search,
       searchValue: "",
       loadingSearch: false,
     };
@@ -58,6 +57,8 @@ export default {
     },
   },
   created() {
+    const currentUser = this.$store.state.auth.user;
+    this.$store.dispatch("setUser", currentUser);
     this.users = this.getAllUsers;
     this.usersListClone = this.getAllUsers;
   },

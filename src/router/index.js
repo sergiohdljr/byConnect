@@ -37,6 +37,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/DeleteUser",
+    name: "DeleteUser",
+    component: routesViews.DeleteUser,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/login",
     name: "Login",
     component: routesViews.Login,

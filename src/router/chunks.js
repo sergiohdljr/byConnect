@@ -6,4 +6,5 @@ export const routesViews = {
   Login: () => import("../views/LoginView.vue"),
   Register: () => import("../views/RegisterView.vue"),
   Config: () => import("../views/ConfigView.vue"),
+  DeleteUser: () => import("../views/DeleteUserView.vue"),
 };

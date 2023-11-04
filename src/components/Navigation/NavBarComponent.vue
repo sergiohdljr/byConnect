@@ -80,7 +80,7 @@ export default {
         {
           title: "Configurações",
           icon: "mdi-cog",
-          redirect: `/Configuration/${this.user.username}`,
+          redirect: `/Configuration`,
         },
       ],
     };

@@ -74,5 +74,13 @@ export default {
         }
       });
     },
+    async deleteUser({ commit }) {
+      try {
+        await auth.currentUser.delete();
+        commit("CLEAR_USER");
+      } catch (error) {
+        console.log(error.code);
+      }
+    },
   },
 };

@@ -31,7 +31,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/Configuration/:username",
+    path: "/Configuration",
     name: "Config",
     component: routesViews.Config,
     meta: { requiresAuth: true },

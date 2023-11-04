@@ -64,26 +64,7 @@ export default {
     await this.$store.dispatch("fetchUser");
     await this.waitForCurrentUser();
 
-    this.currentUser = this.$store.state.auth.user;
-
-    this.user = {
-      nome: this.currentUser.displayName,
-      username: this.currentUser.email,
-      fotoPerfil: this.currentUser.photoURL,
-    };
-
-    const currentUser = {
-      nome: this.user.nome,
-      username: this.user.username,
-      fotoPerfil: this.user.fotoPerfil,
-      email: this.user.username,
-      age: "",
-      endereco: "",
-      numberOfPosts: "Ainda não possui Postagens",
-      privateProfile: auth.currentUser.isAnonymous,
-      posts: [],
-    };
-    this.$store.dispatch("setUser", currentUser);
+    this.user = this.$store.state.auth.user;
   },
 };
 </script>

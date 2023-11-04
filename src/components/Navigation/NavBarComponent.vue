@@ -15,11 +15,11 @@
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img :src="user.fotoPerfil"></v-img>
+            <v-img :src="user.photoURL"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ user.nome }}</v-list-item-title>
+            <v-list-item-title>{{ user.displayName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 

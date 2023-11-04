@@ -74,6 +74,15 @@ export default {
         }
       });
     },
+    // eslint-disable-next-line no-unused-vars
+    async updateUserInfo({ commit }, payload) {
+      const { displayName } = payload;
+      try {
+        await auth.updateCurrentUser({ displayName });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async deleteUser({ commit }) {
       try {
         await auth.currentUser.delete();

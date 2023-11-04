@@ -20,7 +20,12 @@
         ></v-file-input>
       </v-col>
     </v-row>
-    <v-btn color="primary" @click="editarInformacoesDoUsuario">Editar</v-btn>
+    <v-btn
+      color="primary"
+      :loading="editarLoading"
+      @click="editarInformacoesDoUsuario"
+      >Editar</v-btn
+    >
     <v-row class="mt-15 d-flex flex-column">
       <h3>Deletar Usuário</h3>
       <p>
@@ -39,7 +44,6 @@ export default {
     return {
       userInfo: {
         displayName: "",
-        photoURL: "",
       },
       editarLoading: false,
       deleteLoading: false,
@@ -47,7 +51,11 @@ export default {
   },
   methods: {
     editarInformacoesDoUsuario() {
-      console.log(this.userInfo.displayName);
+      this.editarLoading = true;
+      setTimeout(() => {
+        this.$store.dispatch("updateUserInfo", this.userInfo);
+        this.editarLoading = false;
+      }, 2000);
     },
     deleteContaDoUsuario() {
       this.deleteLoading = true;

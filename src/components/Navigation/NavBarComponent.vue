@@ -15,11 +15,11 @@
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img :src="user.fotoPerfil"></v-img>
+            <v-img :src="user.photoURL"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ user.nome }}</v-list-item-title>
+            <v-list-item-title>{{ user.displayName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -32,7 +32,9 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <router-link :to="item.redirect">{{ item.title }}</router-link>
+              <router-link :to="item.redirect"
+                ><p>{{ item.title }}</p></router-link
+              >
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -74,6 +76,11 @@ export default {
           title: "Posts",
           icon: "mdi-post",
           redirect: `/Posts/${this.user.username}`,
+        },
+        {
+          title: "Configurações",
+          icon: "mdi-cog",
+          redirect: `/Configuration`,
         },
       ],
     };
@@ -122,5 +129,10 @@ export default {
 .logout-btn > button {
   display: flex;
   gap: 2rem;
+}
+
+.link-style {
+  color: white;
+  text-decoration: none !important;
 }
 </style>

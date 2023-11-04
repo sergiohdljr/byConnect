@@ -8,12 +8,14 @@
       />
     </template>
     <template v-slot:content>
-      <router-view />
+      <LoadingComponent v-if="pageLoading" />
+      <router-view v-else />
     </template>
   </BaseLayoutApp>
 </template>
 <script>
 import NavBarComponent from "./components/Navigation/NavBarComponent.vue";
+import LoadingComponent from "./components/LoadingComponent.vue";
 import BaseLayoutApp from "./layout/BaseLayoutApp.vue";
 import { auth } from "./config/firebase";
 
@@ -21,12 +23,14 @@ export default {
   components: {
     NavBarComponent,
     BaseLayoutApp,
+    LoadingComponent,
   },
   data() {
     return {
       user: null,
       currentUser: null,
       showNav: false,
+      pageLoading: true,
     };
   },
   methods: {
@@ -51,30 +55,16 @@ export default {
       }
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.pageLoading = false;
+    }, 1200);
+  },
   async created() {
     await this.$store.dispatch("fetchUser");
     await this.waitForCurrentUser();
 
-    this.currentUser = this.$store.state.auth.user;
-
-    this.user = {
-      nome: this.currentUser.displayName,
-      username: this.currentUser.email,
-      fotoPerfil: this.currentUser.photoURL,
-    };
-
-    const currentUser = {
-      nome: this.user.nome,
-      username: this.user.username,
-      fotoPerfil: this.user.fotoPerfil,
-      email: this.user.username,
-      age: "",
-      endereco: "",
-      numberOfPosts: "Ainda não possui Postagens",
-      privateProfile: auth.currentUser.isAnonymous,
-      posts: [],
-    };
-    this.$store.dispatch("setUser", currentUser);
+    this.user = this.$store.state.auth.user;
   },
 };
 </script>

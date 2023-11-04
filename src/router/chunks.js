@@ -5,4 +5,5 @@ export const routesViews = {
   Posts: () => import("../views/PostsView.vue"),
   Login: () => import("../views/LoginView.vue"),
   Register: () => import("../views/RegisterView.vue"),
+  Config: () => import("../views/ConfigView.vue"),
 };

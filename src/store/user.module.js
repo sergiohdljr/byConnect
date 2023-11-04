@@ -10,7 +10,7 @@ const posts = users.reduce((posts, user) => {
 export default {
   namespace: true,
   state: {
-    users: [...users],
+    users: [],
     feed: [...posts],
   },
   getters: {
@@ -39,7 +39,13 @@ export default {
       state.feed = [];
     },
     ADD_USER(state, user) {
-      state.users.push(user);
+      const userAlreadyOnTheList = state.users.find(
+        (usuario) => usuario.email === user.email
+      );
+      if (!userAlreadyOnTheList) {
+        state.users.push(user);
+      }
+      return;
     },
     FILTER_USERS_LIST(state, search) {
       state.users = state.users.filter((user) =>

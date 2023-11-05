@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
   signOut,
 } from "firebase/auth";
 import { auth, githubProvider, googleProvider } from "@/config/firebase";
@@ -75,12 +76,12 @@ export default {
       });
     },
     // eslint-disable-next-line no-unused-vars
-    async updateUserInfo({ commit }, payload) {
-      const { displayName } = payload;
+    async updateUserInfo({ commit }, UserPayload) {
+      const user = auth.currentUser;
       try {
-        await auth.updateCurrentUser({ displayName });
+        await updateProfile(user, UserPayload);
       } catch (error) {
-        console.log(error);
+        throw new Error(error.code);
       }
     },
     async deleteUser({ commit }) {

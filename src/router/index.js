@@ -43,6 +43,12 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/UpdateUser",
+    name: "UpdateUser",
+    component: routesViews.UpdateUser,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/login",
     name: "Login",
     component: routesViews.Login,

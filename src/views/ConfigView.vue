@@ -4,29 +4,8 @@
     <p class="mt-10 d-flex flex-row align-center">
       Editar informações de usuário:
     </p>
-    <v-row>
-      <v-col outlined order="12">
-        <v-text-field
-          v-model="userInfo.displayName"
-          label="Nome"
-          hide-details="auto"
-        />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col outlined order="12">
-        <v-file-input
-          label="File input"
-          filled
-          prepend-icon="mdi-camera"
-        ></v-file-input>
-      </v-col>
-    </v-row>
-    <v-btn
-      color="primary"
-      :loading="editarLoading"
-      @click="editarInformacoesDoUsuario"
-      >Editar</v-btn
+    <v-btn @click="$router.push('/UpdateUser')"
+      >Editar Informações do usuário</v-btn
     >
     <v-row class="mt-15 d-flex flex-column">
       <div class="d-flex flex-row align-end">

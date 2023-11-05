@@ -38,17 +38,20 @@
 </template>
 <script>
 import FormPostComponent from "./FormPostComponent.vue";
+import { auth } from "../config/firebase";
 
 export default {
-  props: {
-    user: Object,
-  },
   components: {
     FormPostComponent,
   },
   data() {
     return {
       dialog: false,
+      user: {
+        nome: auth.currentUser.displayName,
+        username: auth.currentUser.email,
+        fotoPerfil: auth.currentUser.photoURL,
+      },
     };
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <UserCard :user-data="user" />
-    <PostDialog :user="user" />
+    <PostDialog />
   </div>
 </template>
 

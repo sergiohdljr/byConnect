@@ -56,6 +56,7 @@ export default {
       const { email, password } = payload;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
+        router.push("/register/profile");
       } catch (error) {
         throw new Error(error.code);
       }

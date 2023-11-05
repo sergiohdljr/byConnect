@@ -8,4 +8,5 @@ export const routesViews = {
   Config: () => import("../views/ConfigView.vue"),
   DeleteUser: () => import("../views/DeleteUserView.vue"),
   UpdateUser: () => import("../views/UpdateUserView.vue"),
+  RegisterComplement: () => import("../views/RegisterComplement.vue"),
 };

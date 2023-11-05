@@ -1,9 +1,9 @@
 <template>
   <v-row justify="center">
     <UpdateInfoDialog
-      :to-home="false"
-      :texto-dialog="`Preencha os campos para atualizar seus dados`"
-      :texto-btn="`Atualizar Usuário`"
+      :to-home="true"
+      :texto-dialog="`Crie o seu Perfil de usuário`"
+      :texto-btn="`Criar Perfil`"
     />
   </v-row>
 </template>

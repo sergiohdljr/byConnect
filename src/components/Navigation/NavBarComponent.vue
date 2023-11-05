@@ -70,12 +70,12 @@ export default {
         {
           title: "Perfil",
           icon: "mdi-account",
-          redirect: `/User-profile/${this.user.username}`,
+          redirect: `/User-profile/${this.user.email}`,
         },
         {
           title: "Posts",
           icon: "mdi-post",
-          redirect: `/Posts/${this.user.username}`,
+          redirect: `/Posts/${this.user.email}`,
         },
         {
           title: "Configurações",

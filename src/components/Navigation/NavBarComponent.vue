@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar elevation="5" height="80px">
+    <v-toolbar fixed elevation="5" height="80px">
       <div class="manu-wrapper">
         <v-btn @click.stop="drawer = !drawer">
           <v-icon>mdi-menu-open</v-icon>
@@ -66,11 +66,15 @@ export default {
       drawer: null,
       items: [
         { title: "Time Line", icon: "mdi-view-dashboard", redirect: "/" },
-        { title: "Todos Usuários", icon: "mdi-forum", redirect: "/Users" },
         {
           title: "Perfil",
           icon: "mdi-account",
           redirect: `/User-profile/${this.user.email}`,
+        },
+        {
+          title: "Todos Usuários",
+          icon: "mdi-account-group",
+          redirect: "/Users",
         },
         {
           title: "Posts",

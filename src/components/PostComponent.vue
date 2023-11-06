@@ -24,9 +24,9 @@
           <v-list-item-title class="h1">{{
             postData.user.nome
           }}</v-list-item-title>
-          <v-list-item-title class="light-gray"
-            >@{{ postData.user.username }}</v-list-item-title
-          >
+          <v-list-item-title class="light-gray">{{
+            postData.user.username
+          }}</v-list-item-title>
         </v-list-item-content>
         <v-row
           v-if="allowActions"

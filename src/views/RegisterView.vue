@@ -23,7 +23,7 @@
     <v-btn
       :loading="loading"
       type="submit"
-      color="primary text-capitalize text-subtitle-1"
+      color="primary text-none text-subtitle-1"
       >Registre-se</v-btn
     >
     <router-link to="/login">Login</router-link>

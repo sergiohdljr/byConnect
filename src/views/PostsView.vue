@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="font-weight-light">
-      Todos os posts do usuário @{{ $route.params.username }}:
+      Todos os posts do usuário {{ $route.params.username }}:
     </h2>
     <PostComponent
       v-for="(post, index) in posts"

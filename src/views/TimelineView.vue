@@ -21,6 +21,7 @@ import NoPostComponent from "../components/NoPostComponet.vue";
 import { auth } from "@/config/firebase";
 import { mapGetters } from "vuex";
 import ScrollButton from "@/components/ScrollButton.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   components: {
@@ -42,13 +43,17 @@ export default {
   methods: {
     publicar(dados) {
       const novaPublicacao = {
-        id: Math.random(),
+        id: uuidv4(),
         texto: dados.texto,
         foto: dados.img,
         datetime: new Date(),
         user: this.user,
       };
-      this.$store.dispatch("post", novaPublicacao);
+
+      if (!novaPublicacao.foto) {
+        novaPublicacao.foto = "";
+        this.$store.dispatch("post", novaPublicacao);
+      }
     },
     deletePost(id) {
       this.$store.dispatch("delete", id);

@@ -34,7 +34,7 @@
 <script>
 export default {
   props: {
-    postId: Number,
+    postId: String,
   },
   data() {
     return {

@@ -1,17 +1,11 @@
-import { users } from "@/data";
-
-const posts = users.reduce((posts, user) => {
-  if (user.posts) {
-    return posts.concat(user.posts);
-  }
-  return posts;
-}, []);
+import { db } from "@/config/firebase";
+import { doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 export default {
   namespace: true,
   state: {
     users: [],
-    feed: [...posts],
+    feed: [],
   },
   getters: {
     getAllPosts: function (state) {
@@ -54,14 +48,31 @@ export default {
     },
   },
   actions: {
-    post({ commit }, post) {
-      commit("ADD_POST", post);
+    async post({ commit }, post) {
+      try {
+        const postRef = doc(db, "posts", post.id);
+        await setDoc(postRef, post);
+        commit("ADD_POST", post);
+      } catch (error) {
+        throw new Error(error);
+      }
     },
-    delete({ commit }, id) {
-      commit("DELETE_POST", id);
+    async delete({ commit }, id) {
+      try {
+        await deleteDoc(doc(db, "posts", id));
+        commit("DELETE_POST", id);
+      } catch (error) {
+        throw new Error(error);
+      }
     },
-    editar({ commit }, payload) {
-      commit("EDIT_POST", payload);
+    async editar({ commit }, payload) {
+      try {
+        const postRef = doc(db, "posts", payload.id);
+        await updateDoc(postRef, payload);
+        commit("EDIT_POST", payload);
+      } catch (error) {
+        throw new Error(error.message);
+      }
     },
     deleteAllPosts({ commit }) {
       commit("DELETE_ALL_POSTS");

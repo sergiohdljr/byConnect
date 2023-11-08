@@ -3,7 +3,7 @@
     <ScrollButton />
     <FormPostComponent @Post="publicar" />
     <PostComponent
-      v-for="(publi, index) in posts"
+      v-for="(publi, index) in getAllPosts"
       :post-data="publi"
       :allow-actions="publi.user.username === user.username"
       :delete-post="deletePost"
@@ -38,7 +38,6 @@ export default {
         username: auth.currentUser.email,
         fotoPerfil: auth.currentUser.photoURL,
       },
-      posts: [],
     };
   },
   methods: {
@@ -53,8 +52,8 @@ export default {
 
       if (!novaPublicacao.foto) {
         novaPublicacao.foto = "";
-        this.$store.dispatch("post", novaPublicacao);
       }
+      this.$store.dispatch("post", novaPublicacao);
     },
     deletePost(id) {
       this.$store.dispatch("delete", id);
@@ -66,10 +65,8 @@ export default {
   computed: {
     ...mapGetters(["getAllPosts"]),
   },
-  async mounted() {
-    const data = await this.getAllPosts;
-    this.posts = data;
-    console.log(data);
+  mounted() {
+    this.$store.dispatch("fetchPosts");
   },
 };
 </script>

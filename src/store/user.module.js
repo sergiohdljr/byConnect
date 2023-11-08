@@ -15,12 +15,8 @@ export default {
     feed: [],
   },
   getters: {
-    getAllPosts: async function (state) {
-      const querySnapShot = await getDocs(collection(db, "posts"));
-      const posts = querySnapShot.docs.map((doc) => doc.data());
-
-      state.feed;
-      return posts;
+    getAllPosts: function (state) {
+      return state.feed;
     },
     getAllUsers: function (state) {
       return state.users;
@@ -57,6 +53,9 @@ export default {
         user.username.toLowerCase().startsWith(search.toLowerCase())
       );
     },
+    SET_POSTS(state, posts) {
+      state.feed = posts;
+    },
   },
   actions: {
     async post({ commit }, post) {
@@ -81,6 +80,15 @@ export default {
         const postRef = doc(db, "posts", payload.id);
         await updateDoc(postRef, payload);
         commit("EDIT_POST", payload);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    async fetchPosts({ commit }) {
+      try {
+        const querySnapShot = await getDocs(collection(db, "posts"));
+        const posts = querySnapShot.docs.map((doc) => doc.data());
+        commit("SET_POSTS", posts);
       } catch (error) {
         throw new Error(error.message);
       }

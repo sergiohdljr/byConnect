@@ -1,5 +1,12 @@
 import { db } from "@/config/firebase";
-import { doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 
 export default {
   namespace: true,
@@ -8,8 +15,12 @@ export default {
     feed: [],
   },
   getters: {
-    getAllPosts: function (state) {
-      return state.feed;
+    getAllPosts: async function (state) {
+      const querySnapShot = await getDocs(collection(db, "posts"));
+      const posts = querySnapShot.docs.map((doc) => doc.data());
+
+      state.feed;
+      return posts;
     },
     getAllUsers: function (state) {
       return state.users;

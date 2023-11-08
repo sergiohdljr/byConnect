@@ -3,7 +3,7 @@
     <ScrollButton />
     <FormPostComponent @Post="publicar" />
     <PostComponent
-      v-for="(publi, index) in getAllPosts"
+      v-for="(publi, index) in posts"
       :post-data="publi"
       :allow-actions="publi.user.username === user.username"
       :delete-post="deletePost"
@@ -38,6 +38,7 @@ export default {
         username: auth.currentUser.email,
         fotoPerfil: auth.currentUser.photoURL,
       },
+      posts: [],
     };
   },
   methods: {
@@ -64,6 +65,11 @@ export default {
   },
   computed: {
     ...mapGetters(["getAllPosts"]),
+  },
+  async mounted() {
+    const data = await this.getAllPosts;
+    this.posts = data;
+    console.log(data);
   },
 };
 </script>

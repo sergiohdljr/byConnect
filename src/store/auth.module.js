@@ -90,7 +90,7 @@ export default {
         await auth.currentUser.delete();
         commit("CLEAR_USER");
       } catch (error) {
-        console.log(error.code);
+        throw new Error(error.code);
       }
     },
   },

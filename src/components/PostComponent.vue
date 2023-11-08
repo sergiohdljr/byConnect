@@ -57,11 +57,13 @@ export default {
   },
   computed: {
     formatarDataAndHour() {
-      const data = this.postData.datetime;
-      const horas = String(data.getHours()).padStart(2, "0");
-      const minutos = String(data.getMinutes()).padStart(2, "0");
+      const data = new Date(this.postData.datetime * 1000);
+      const horas = data.getUTCHours();
+      const minutos = data.getUTCMinutes();
 
-      return `${horas}:${minutos}`;
+      return `${horas.toString().padStart(2, "0")}:${minutos
+        .toString()
+        .padStart(2, "0")}`;
     },
     profilePic() {
       return this.postData.user.fotoPerfil

@@ -62,9 +62,9 @@
                 <v-list-item-subtitle class="font-weight-medium">
                   <v-icon small>{{ providerIcon }}</v-icon>
                   {{
-                    userData.providerData[0].providerId === "password"
+                    userData.providerId === "password"
                       ? "Email/senha"
-                      : userData.providerData[0].providerId
+                      : userData.providerId
                   }}</v-list-item-subtitle
                 >
               </v-list-item-content>
@@ -121,16 +121,16 @@ export default {
         : "visualizar perfil de Usuário";
     },
     providerIcon() {
-      if (this.userData.providerData[0].providerId === "github.com") {
+      if (this.userData.providerId === "github.com") {
         return "mdi-github";
-      } else if (this.userData.providerData[0].providerId === "google.com") {
+      } else if (this.userData.providerId === "google.com") {
         return "mdi-google";
       } else {
         return "mdi-email-lock";
       }
     },
     createdAt() {
-      const userCreated = parseInt(this.userData.metadata.createdAt);
+      const userCreated = parseInt(this.userData.createdAt);
       const date = new Date(userCreated);
       const options = {
         weekday: "long",
@@ -145,7 +145,7 @@ export default {
       return formattedDate;
     },
     lastLoginAt() {
-      const login = parseInt(this.userData.metadata.lastLoginAt);
+      const login = parseInt(this.userData.lastLoginAt);
       const date = new Date(login);
       const options = {
         weekday: "long",

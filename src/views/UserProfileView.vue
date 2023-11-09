@@ -1,29 +1,30 @@
 <template>
   <div>
-    <UserCard :user-data="user" />
+    <LoadingComponentVue v-if="user === ''" />
+    <UserCard v-else :user-data="user" />
     <PostDialog />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import UserCard from "@/components/UserCard.vue";
 import PostDialog from "@/components/PostDialog.vue";
+import LoadingComponentVue from "@/components/LoadingComponent.vue";
+import { db } from "@/config/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export default {
-  components: { UserCard, PostDialog },
+  components: { UserCard, PostDialog, LoadingComponentVue },
   data() {
     return {
-      username: "",
       user: "",
     };
   },
-  computed: {
-    ...mapGetters(["getAllUsers"]),
-  },
-  created() {
+  async created() {
     this.username = this.$route.params.username;
-    this.user = this.$store.state.auth.user;
+    const userRef = doc(db, "users", this.$route.params.username);
+    const userSnap = await getDoc(userRef);
+    this.user = userSnap.data();
   },
 };
 </script>

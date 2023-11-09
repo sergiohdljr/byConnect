@@ -21,6 +21,10 @@ export default {
     getAllUsers: function (state) {
       return state.users;
     },
+    getUserByEmail(state, email) {
+      const user = state.users.filter((usuario) => usuario.email === email);
+      return user;
+    },
   },
   mutations: {
     ADD_POST(state, post) {
@@ -87,6 +91,15 @@ export default {
         throw new Error(error.message);
       }
     },
+    deleteAllPosts({ commit }) {
+      commit("DELETE_ALL_POSTS");
+    },
+    filtrar({ commit }, search) {
+      commit("FILTER_USERS_LIST", search);
+    },
+    setUser({ commit }, user) {
+      commit("ADD_USER", user);
+    },
     async fetchPosts({ commit }) {
       try {
         const querySnapShot = await getDocs(collection(db, "posts"));
@@ -104,15 +117,6 @@ export default {
       } catch (error) {
         throw new Error(error.message);
       }
-    },
-    deleteAllPosts({ commit }) {
-      commit("DELETE_ALL_POSTS");
-    },
-    filtrar({ commit }, search) {
-      commit("FILTER_USERS_LIST", search);
-    },
-    setUser({ commit }, user) {
-      commit("ADD_USER", user);
     },
   },
 };

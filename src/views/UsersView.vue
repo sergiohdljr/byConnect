@@ -14,13 +14,16 @@
       Usuários que correspondem a sua busca por: "{{ searchQuery }}"
     </h2>
     <div class="wrapper-user-cards">
-      <UserCard v-for="(user, index) in users" :key="index" :user-data="user" />
+      <UserCard
+        v-for="(user, index) in getAllUsers"
+        :key="index"
+        :user-data="user"
+      />
     </div>
   </div>
 </template>
 <script>
 import UserCard from "../components/UserCard.vue";
-// import { users } from "../data";
 import { mapGetters } from "vuex";
 
 export default {
@@ -56,12 +59,15 @@ export default {
       this.users = this.usersListClone;
     },
   },
-  created() {
+  mounted() {
+    this.$store.dispatch("fetchAllUsers");
+  },
+  /*created() {
     const currentUser = this.$store.state.auth.user;
     this.$store.dispatch("setUser", currentUser);
     this.users = this.getAllUsers;
     this.usersListClone = this.getAllUsers;
-  },
+  },*/
 };
 </script>
 

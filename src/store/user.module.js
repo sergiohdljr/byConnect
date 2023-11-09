@@ -48,6 +48,9 @@ export default {
       }
       return;
     },
+    SET_USERS(state, users) {
+      state.users = users;
+    },
     FILTER_USERS_LIST(state, search) {
       state.users = state.users.filter((user) =>
         user.username.toLowerCase().startsWith(search.toLowerCase())
@@ -89,6 +92,15 @@ export default {
         const querySnapShot = await getDocs(collection(db, "posts"));
         const posts = querySnapShot.docs.map((doc) => doc.data());
         commit("SET_POSTS", posts);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    async fetchAllUsers({ commit }) {
+      try {
+        const querySnapShot = await getDocs(collection(db, "users"));
+        const users = querySnapShot.docs.map((doc) => doc.data());
+        commit("SET_USERS", users);
       } catch (error) {
         throw new Error(error.message);
       }

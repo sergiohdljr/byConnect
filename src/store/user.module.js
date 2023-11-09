@@ -40,7 +40,13 @@ export default {
         post.texto = texto;
       }
     },
-    DELETE_ALL_POSTS(state) {
+    // eslint-disable-next-line no-unused-vars
+    async DELETE_ALL_POSTS(state) {
+      const postRef = collection(db, "posts");
+      const querySnapShot = await getDocs(postRef);
+      querySnapShot.forEach(async (docu) => {
+        await deleteDoc(docu.ref);
+      });
       state.feed = [];
     },
     ADD_USER(state, user) {

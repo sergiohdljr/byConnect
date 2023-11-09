@@ -11,7 +11,7 @@
         <v-icon color="white">mdi-trash-can-outline </v-icon>
       </div>
     </template>
-    <span>deleter todos os posts</span>
+    <span>deletar todos os posts</span>
   </v-tooltip>
 </template>
 

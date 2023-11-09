@@ -13,7 +13,10 @@ export default {
   namespace: true,
   state: { user: null },
   mutations: {
-    async SET_USER(state, user) {
+    SET_USER(state, user) {
+      state.user = user;
+    },
+    async SAVE_USER(state, user) {
       const userObj = {
         displayName: user.displayName,
         email: user.email,
@@ -23,7 +26,6 @@ export default {
         createdAt: user.metadata.createdAt,
         lastLoginAt: user.metadata.lastLoginAt,
       };
-      state.user = user;
       const usersRef = doc(db, "users", userObj.email);
       await setDoc(usersRef, userObj);
     },
@@ -52,6 +54,7 @@ export default {
       }
 
       commit("SET_USER", auth.currentUser);
+      commit("SAVE_USER", auth.currentUser);
     },
 
     async githubSignIn({ commit }) {
@@ -62,6 +65,7 @@ export default {
       }
 
       commit("SET_USER", auth.currentUser);
+      commit("SAVE_USER", auth.currentUser);
     },
 
     async register({ commit }, payload) {
@@ -73,6 +77,7 @@ export default {
         throw new Error(error.code);
       }
       commit("SET_USER", auth.currentUser);
+      commit("SAVE_USER", auth.currentUser);
     },
     async logout({ commit }) {
       await signOut(auth);
@@ -96,6 +101,7 @@ export default {
       } catch (error) {
         throw new Error(error.code);
       }
+      commit("SAVE_USER", user);
     },
     async deleteUser({ commit }) {
       try {

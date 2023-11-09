@@ -23,9 +23,6 @@ export default {
   },
   created() {
     this.username = this.$route.params.username;
-    /*const userData = this.getAllUsers.filter(
-      (user) => user.username.toLowerCase() === this.username.toLowerCase()
-    )[0];*/
     this.user = this.$store.state.auth.user;
   },
 };

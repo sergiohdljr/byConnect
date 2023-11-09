@@ -5,15 +5,27 @@ import {
   updateProfile,
   signOut,
 } from "firebase/auth";
-import { auth, githubProvider, googleProvider } from "@/config/firebase";
+import { auth, db, githubProvider, googleProvider } from "@/config/firebase";
 import router from "../router/index";
+import { doc, setDoc } from "firebase/firestore";
 
 export default {
   namespace: true,
   state: { user: null },
   mutations: {
-    SET_USER(state, user) {
+    async SET_USER(state, user) {
+      const userObj = {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        isAnonimous: user.isAnonymous,
+        providerId: user.providerData[0].providerId,
+        createdAt: user.metadata.createdAt,
+        lastLoginAt: user.metadata.lastLoginAt,
+      };
       state.user = user;
+      const usersRef = doc(db, "users", userObj.email);
+      await setDoc(usersRef, userObj);
     },
     CLEAR_USER(state) {
       state.user = null;

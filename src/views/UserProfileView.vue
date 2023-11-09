@@ -21,7 +21,6 @@ export default {
     };
   },
   async created() {
-    this.username = this.$route.params.username;
     const userRef = doc(db, "users", this.$route.params.username);
     const userSnap = await getDoc(userRef);
     this.user = userSnap.data();

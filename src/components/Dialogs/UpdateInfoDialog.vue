@@ -28,16 +28,14 @@
             </v-row>
             <v-row>
               <v-col outlined order="12">
-                <v-text-field
-                  v-model="userInfo.photoURL"
-                  label="Foto"
-                  hide-details="auto"
-                  :rules="formRules.photoUrlRules"
-                />
-                <p class="mt-2">
-                  OBS: No momento não estamos aceitando upload de imagens, você
-                  terá que colar um link válido para uma imagem.
-                </p>
+                <v-file-input
+                  label="Faça o upload da imagem"
+                  filled
+                  :loading="imageReady"
+                  prepend-icon="mdi-camera"
+                  @change="getImageUrl"
+                  v-model="image"
+                ></v-file-input>
               </v-col>
             </v-row>
           </v-card-text>
@@ -71,6 +69,9 @@
   </div>
 </template>
 <script>
+import { storage } from "@/config/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+
 export default {
   props: {
     toHome: Boolean,
@@ -85,6 +86,9 @@ export default {
   data() {
     return {
       actualUser: this.$store.state.auth.user,
+      image: null,
+      imageURL: null,
+      imageReady: false,
       userInfo: {},
       dialog: true,
       atualizandoLoading: false,
@@ -117,6 +121,23 @@ export default {
     },
     goBackToConfig() {
       this.$router.push("/Configuration");
+    },
+    async getImageUrl(file) {
+      this.ImageReady = true;
+      if (file) {
+        const storageRef = ref(storage, "profileImages/" + file.name);
+        try {
+          await uploadBytes(storageRef, file);
+        } catch (error) {
+          throw new Error(error);
+        }
+        await getDownloadURL(storageRef).then((url) => {
+          this.userInfo.photoURL = url;
+        });
+        setTimeout(() => {
+          this.ImageReady = false;
+        }, 1500);
+      }
     },
   },
 };

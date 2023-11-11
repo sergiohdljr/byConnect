@@ -13,9 +13,11 @@
         required
       />
       <v-text-field
-        type="password"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
         v-model="user.password"
         :rules="formRules.passwordRules"
+        @click:append="showPassword = !showPassword"
         label="Senha"
         required
       />
@@ -49,6 +51,7 @@
 export default {
   data() {
     return {
+      showPassword: false,
       formRules: {
         emailRules: [
           (email) => !!email || "Digite um E-mail",

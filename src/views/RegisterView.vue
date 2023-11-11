@@ -13,10 +13,21 @@
         required
       />
       <v-text-field
-        type="password"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
         v-model="user.password"
         :rules="formRules.passwordRules"
+        @click:append="showPassword = !showPassword"
         label="Senha"
+        required
+      />
+      <v-text-field
+        :append-icon="showRepitedPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showRepitedPassword ? 'text' : 'password'"
+        v-model="checkPassword"
+        :rules="formRules.secondPasswordRule"
+        @click:append="showRepitedPassword = !showRepitedPassword"
+        label="Repita a sua senha"
         required
       />
     </div>
@@ -35,6 +46,9 @@ export default {
   data() {
     return {
       user: {},
+      checkPassword: "",
+      showPassword: false,
+      showRepitedPassword: false,
       loading: false,
       errorMessage: null,
       formRules: {
@@ -46,6 +60,11 @@ export default {
           (senha) => !!senha || "Digite uma senha",
           (senha) =>
             /^.{6,}$/.test(senha) || "A senha deve ser maior que 6 caracteres.",
+        ],
+        secondPasswordRule: [
+          (secondSenha) =>
+            secondSenha === this.user.password ||
+            "As senhas devem ser identicas",
         ],
       },
     };

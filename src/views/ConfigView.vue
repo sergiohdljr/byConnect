@@ -1,24 +1,47 @@
 <template>
   <v-container>
-    <h3 class="mb-10">Configurações</h3>
-    <p class="mt-10 d-flex flex-row align-center">
-      Editar informações de usuário:
-    </p>
-    <v-btn @click="$router.push('/UpdateUser')"
-      >Editar Informações do usuário</v-btn
-    >
-    <v-row class="pa-3 mt-10 d-flex flex-column">
-      <div class="d-flex flex-row align-end">
-        <h3 class="d-flex flex-row align-end">Deletar Usuário</h3>
+    <h2 class="mb-10">Configurações</h2>
+    <div>
+      <div class="d-flex" style="gap: 0.4rem">
+        <v-icon>mdi-account-circle</v-icon>
+        <h3 style="display: flex; justify-content: center; align-items: end">
+          Editar Perfil
+        </h3>
       </div>
-      <p>
+      <p class="mt-2 d-flex flex-row align-center">
+        Você pode alterar o seu nome ou o seu avatar.
+      </p>
+      <v-btn @click="$router.push('/UpdateUser')">Editar Perfil</v-btn>
+    </div>
+
+    <div class="mt-10">
+      <div class="d-flex" style="gap: 0.4rem">
+        <v-icon>mdi-lock-reset</v-icon>
+        <h3 style="display: flex; justify-content: center; align-items: end">
+          Trocar senha
+        </h3>
+      </div>
+      <p class="mt-2 d-flex flex-row align-center">
+        Editar informações de usuário:
+      </p>
+      <v-btn @click="$router.push('/UpdateUser')"
+        >Editar Informações do usuário</v-btn
+      >
+    </div>
+
+    <div class="mt-10">
+      <div class="d-flex" style="gap: 0.4rem">
+        <v-icon>mdi-account-cancel</v-icon>
+        <h3 style="display: flex; justify-content: center; align-items: end">
+          Deletar conta
+        </h3>
+      </div>
+      <p class="mt-2 d-flex flex-row align-center">
         Ao deletar sua conta você terá todas suas informações excluídas da
         plataforma. Para excluir uma conta ela deve ter um login recente.
       </p>
-      <div>
-        <v-btn color="red" @click="goToDeleteUser">Deletar conta</v-btn>
-      </div>
-    </v-row>
+      <v-btn color="red" @click="goToDeleteUser">Deletar conta</v-btn>
+    </div>
   </v-container>
 </template>
 <script>

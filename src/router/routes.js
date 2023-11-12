@@ -59,4 +59,10 @@ export const routes = [
     component: routesViews.RegisterComplement,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/changepassword",
+    name: "changepassword",
+    component: routesViews.ChangePassword,
+    meta: { requiresAuth: true },
+  },
 ];

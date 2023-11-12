@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
+  updatePassword,
   signOut,
 } from "firebase/auth";
 import { auth, db, githubProvider, googleProvider } from "@/config/firebase";
@@ -82,7 +83,6 @@ export default {
     async logout({ commit }) {
       await signOut(auth);
       commit("CLEAR_USER");
-      router.push("/login");
     },
     async fetchUser({ commit }) {
       auth.onAuthStateChanged(async (user) => {
@@ -109,6 +109,15 @@ export default {
         commit("CLEAR_USER");
       } catch (error) {
         throw new Error(error.code);
+      }
+    },
+    async changePassword({ commit }, novaSenha) {
+      const user = auth.currentUser;
+      try {
+        await updatePassword(user, novaSenha);
+        commit("CLEAR_USER");
+      } catch (error) {
+        throw new Error(error.message);
       }
     },
   },

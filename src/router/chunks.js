@@ -9,4 +9,5 @@ export const routesViews = {
   DeleteUser: () => import("../views/DeleteUserView.vue"),
   UpdateUser: () => import("../views/UpdateUserView.vue"),
   RegisterComplement: () => import("../views/RegisterComplement.vue"),
+  ChangePassword: () => import("../views/ChangePassword.vue"),
 };

@@ -22,11 +22,10 @@
         </h3>
       </div>
       <p class="mt-2 d-flex flex-row align-center">
-        Editar informações de usuário:
+        Por questões de segurança ao trocar sua senha você terá que mudar para
+        uma mais forte:
       </p>
-      <v-btn @click="$router.push('/UpdateUser')"
-        >Editar Informações do usuário</v-btn
-      >
+      <v-btn @click="$router.push('/changepassword')">Trocar senha</v-btn>
     </div>
 
     <div class="mt-10">

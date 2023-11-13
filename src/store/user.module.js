@@ -6,6 +6,8 @@ import {
   deleteDoc,
   collection,
   getDocs,
+  orderBy,
+  query,
 } from "firebase/firestore";
 
 export default {
@@ -108,7 +110,11 @@ export default {
     },
     async fetchPosts({ commit }) {
       try {
-        const querySnapShot = await getDocs(collection(db, "posts"));
+        const consulta = query(
+          collection(db, "posts"),
+          orderBy("data", "desc")
+        );
+        const querySnapShot = await getDocs(consulta);
         const posts = querySnapShot.docs.map((doc) => doc.data());
         commit("SET_POSTS", posts);
       } catch (error) {

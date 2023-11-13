@@ -6,7 +6,12 @@
           <v-icon>mdi-menu-open</v-icon>
         </v-btn>
         <div class="swish-theme">
-          <v-switch v-model="$vuetify.theme.dark" inset></v-switch>
+          <v-switch
+            v-model="$vuetify.theme.dark"
+            :append-icon="themeIcon"
+            inset
+          >
+          </v-switch>
         </div>
       </div>
       <ButtonDeleteAll v-if="isOnTimeline" :delete-all="deleteAllPosts" />
@@ -62,6 +67,7 @@ export default {
   },
   data() {
     return {
+      darkTheme: true,
       username: this.$route.params.username,
       drawer: null,
       items: [
@@ -93,6 +99,11 @@ export default {
     isOnTimeline() {
       return this.$route.path === "/";
     },
+    themeIcon() {
+      return this.$vuetify.theme.isDark
+        ? "mdi-weather-night"
+        : "mdi-white-balance-sunny";
+    },
   },
   methods: {
     Logout() {
@@ -121,6 +132,7 @@ export default {
   height: 100%;
   align-items: flex-end;
   justify-content: center;
+  margin-right: 1rem;
 }
 
 .logout-btn {

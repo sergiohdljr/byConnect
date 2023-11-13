@@ -1,7 +1,8 @@
 <template>
   <v-card class="mx-auto" outlined width="100%" style="margin-bottom: 1rem">
-    <v-card-title>
-      <span class="subtitle-1 light-gray">{{ formatarDataAndHour }}</span>
+    <v-card-title class="d-flex justify-space-between">
+      <span class="subtitle-1 light-gray">{{ postData.horario }}</span>
+      <span class="subtitle-1 light-gray">{{ postData.data }}</span>
     </v-card-title>
     <v-card-title v-if="postData.texto.length > 0 || postData.texto">
       <span
@@ -56,15 +57,6 @@ export default {
     return {};
   },
   computed: {
-    formatarDataAndHour() {
-      const data = new Date(this.postData.datetime * 1000);
-      const horas = data.getUTCHours();
-      const minutos = data.getUTCMinutes();
-
-      return `${horas.toString().padStart(2, "0")}:${minutos
-        .toString()
-        .padStart(2, "0")}`;
-    },
     profilePic() {
       return this.postData.user.fotoPerfil
         ? this.postData.user.fotoPerfil

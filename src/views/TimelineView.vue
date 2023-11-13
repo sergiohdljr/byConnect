@@ -42,11 +42,24 @@ export default {
   },
   methods: {
     publicar(dados) {
+      const date = new Date();
+      const horario = `${date.getHours()}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}`;
+
+      const dataFormatada = date.toLocaleDateString("pt-BR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
       const novaPublicacao = {
         id: uuidv4(),
         texto: dados.texto,
         foto: dados.img,
-        datetime: new Date(),
+        horario,
+        data: dataFormatada,
         user: this.user,
       };
 

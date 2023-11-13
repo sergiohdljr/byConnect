@@ -2,7 +2,7 @@
   <v-theme-provider root>
     <v-app>
       <v-main>
-        <slot v-if="$route.path !== '/login'" name="navigation"></slot>
+        <slot v-if="$store.state.auth.user" name="navigation"></slot>
         <v-container fluid>
           <v-row justify="center">
             <v-col cols="12" sm="11" md="8" lg="6">

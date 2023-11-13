@@ -2,8 +2,7 @@
   <BaseLayoutApp>
     <template v-slot:navigation>
       <NavBarComponent
-        v-if="showNav"
-        :user="user"
+        :user="$store.state.auth.user"
         :delete-all-posts="DeleteAllPosts"
       />
     </template>
@@ -46,13 +45,6 @@ export default {
           unsubscribe();
         });
       });
-    },
-  },
-  watch: {
-    user(novoUsuario) {
-      if (novoUsuario) {
-        this.showNav = true;
-      }
     },
   },
   mounted() {

@@ -81,6 +81,7 @@ export default {
       commit("SAVE_USER", auth.currentUser);
     },
     async logout({ commit }) {
+      router.push("/");
       await signOut(auth);
       commit("CLEAR_USER");
     },

@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth, db, githubProvider, googleProvider } from "@/config/firebase";
 import router from "../router/index";
-import { doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 export default {
   namespace: true,
@@ -104,8 +104,9 @@ export default {
       }
       commit("SAVE_USER", user);
     },
-    async deleteUser({ commit }) {
+    async deleteUser({ commit }, email) {
       try {
+        await deleteDoc(doc(db, "users", email));
         await auth.currentUser.delete();
         commit("CLEAR_USER");
       } catch (error) {

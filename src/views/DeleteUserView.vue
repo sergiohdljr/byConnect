@@ -45,9 +45,10 @@ export default {
   },
   methods: {
     deleteUserAccount() {
+      const email = this.$store.state.auth.user.email;
       this.deleteLoading = true;
       setTimeout(() => {
-        this.$store.dispatch("deleteUser");
+        this.$store.dispatch("deleteUser", email);
         this.deleteLoading = false;
       }, 2000);
     },

@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth, db, githubProvider, googleProvider } from "@/config/firebase";
 import router from "../router/index";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 
 export default {
   namespace: true,
@@ -30,6 +30,12 @@ export default {
       const usersRef = doc(db, "users", userObj.email);
       await setDoc(usersRef, userObj);
     },
+    async UPDATE_LAST_LOGIN(state, payload) {
+      const { lastLoginAt, email } = payload;
+
+      const userRef = doc(db, "users", email);
+      await updateDoc(userRef, { lastLoginAt: lastLoginAt });
+    },
     CLEAR_USER(state) {
       state.user = null;
     },
@@ -44,7 +50,13 @@ export default {
         throw new Error(error.code);
       }
 
+      const updateLastLogin = {
+        lastLoginAt: auth.currentUser.metadata.lastLoginAt,
+        email,
+      };
+
       commit("SET_USER", auth.currentUser);
+      commit("UPDATE_LAST_LOGIN", updateLastLogin);
     },
 
     async googleSignIn({ commit }) {
@@ -54,8 +66,14 @@ export default {
         throw new Error(error.code);
       }
 
+      const updateLastLogin = {
+        lastLoginAt: auth.currentUser.metadata.lastLoginAt,
+        email: auth.currentUser.email,
+      };
+
       commit("SET_USER", auth.currentUser);
       commit("SAVE_USER", auth.currentUser);
+      commit("UPDATE_LAST_LOGIN", updateLastLogin);
     },
 
     async githubSignIn({ commit }) {
@@ -64,9 +82,14 @@ export default {
       } catch (error) {
         throw new Error(error.code);
       }
+      const updateLastLogin = {
+        lastLoginAt: auth.currentUser.metadata.lastLoginAt,
+        email: auth.currentUser.email,
+      };
 
       commit("SET_USER", auth.currentUser);
       commit("SAVE_USER", auth.currentUser);
+      commit("UPDATE_LAST_LOGIN", updateLastLogin);
     },
 
     async register({ commit }, payload) {
@@ -81,7 +104,6 @@ export default {
       commit("SAVE_USER", auth.currentUser);
     },
     async logout({ commit }) {
-      router.push("/");
       await signOut(auth);
       commit("CLEAR_USER");
     },

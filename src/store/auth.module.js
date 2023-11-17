@@ -8,7 +8,16 @@ import {
 } from "firebase/auth";
 import { auth, db, githubProvider, googleProvider } from "@/config/firebase";
 import router from "../router/index";
-import { deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 export default {
   namespace: true,
@@ -35,6 +44,28 @@ export default {
 
       const userRef = doc(db, "users", email);
       await updateDoc(userRef, { lastLoginAt: lastLoginAt });
+    },
+    async UPDATE_USER_INFO_POSTS(state, payload) {
+      const { email, UserPayload } = payload;
+
+      const updatedUser = {
+        "user.nome": UserPayload.displayName,
+        "user.fotoPerfil": UserPayload.photoURL,
+      };
+
+      const AllPostsUserQuery = query(
+        collection(db, "posts"),
+        where("user.username", "==", email)
+      );
+
+      try {
+        const querySnapshot = await getDocs(AllPostsUserQuery);
+        querySnapshot.forEach(async (documento) => {
+          await updateDoc(documento.ref, updatedUser);
+        });
+      } catch (error) {
+        throw new Error(error.message);
+      }
     },
     CLEAR_USER(state) {
       state.user = null;
@@ -121,6 +152,7 @@ export default {
       const user = auth.currentUser;
       try {
         await updateProfile(user, UserPayload);
+        commit("UPDATE_USER_INFO_POSTS", { email: user.email, UserPayload });
       } catch (error) {
         throw new Error(error.code);
       }

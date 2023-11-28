@@ -1,13 +1,13 @@
 import { db } from "@/config/firebase";
 import {
   doc,
-  setDoc,
+  //setDoc,
   updateDoc,
   deleteDoc,
   collection,
   getDocs,
-  orderBy,
-  query,
+  // orderBy,
+  //query,
 } from "firebase/firestore";
 
 export default {
@@ -73,10 +73,17 @@ export default {
     },
   },
   actions: {
+    // eslint-disable-next-line no-unused-vars
     async post({ commit }, post) {
       try {
-        const postRef = doc(db, "posts", post.id);
-        await setDoc(postRef, post);
+        // eslint-disable-next-line no-unused-vars
+        const sendPost = await fetch("http://localhost:3000/api/v1/post/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(post),
+        });
         commit("ADD_POST", post);
       } catch (error) {
         throw new Error(error);
@@ -110,12 +117,8 @@ export default {
     },
     async fetchPosts({ commit }) {
       try {
-        const consulta = query(
-          collection(db, "posts"),
-          orderBy("data", "desc")
-        );
-        const querySnapShot = await getDocs(consulta);
-        const posts = querySnapShot.docs.map((doc) => doc.data());
+        const response = await fetch("http://localhost:3000/api/v1/posts");
+        const posts = await response.json();
         commit("SET_POSTS", posts);
       } catch (error) {
         throw new Error(error.message);

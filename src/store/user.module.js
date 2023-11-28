@@ -1,8 +1,9 @@
+import { api } from "@/config/axios";
 import { db } from "@/config/firebase";
 import {
-  doc,
+  //doc,
   //setDoc,
-  updateDoc,
+  //updateDoc,
   deleteDoc,
   collection,
   getDocs,
@@ -73,17 +74,9 @@ export default {
     },
   },
   actions: {
-    // eslint-disable-next-line no-unused-vars
     async post({ commit }, post) {
       try {
-        // eslint-disable-next-line no-unused-vars
-        const sendPost = await fetch("http://localhost:3000/api/v1/post/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(post),
-        });
+        await api.post("post/", post);
         commit("ADD_POST", post);
       } catch (error) {
         throw new Error(error);
@@ -91,7 +84,7 @@ export default {
     },
     async delete({ commit }, id) {
       try {
-        await deleteDoc(doc(db, "posts", id));
+        await api.delete(`post-delete/${id}`);
         commit("DELETE_POST", id);
       } catch (error) {
         throw new Error(error);
@@ -99,8 +92,7 @@ export default {
     },
     async editar({ commit }, payload) {
       try {
-        const postRef = doc(db, "posts", payload.id);
-        await updateDoc(postRef, payload);
+        await api.put(`post-update/${payload.id}`, payload);
         commit("EDIT_POST", payload);
       } catch (error) {
         throw new Error(error.message);
@@ -117,9 +109,8 @@ export default {
     },
     async fetchPosts({ commit }) {
       try {
-        const response = await fetch("http://localhost:3000/api/v1/posts");
-        const posts = await response.json();
-        commit("SET_POSTS", posts);
+        const { data } = await api.get("posts");
+        commit("SET_POSTS", data);
       } catch (error) {
         throw new Error(error.message);
       }

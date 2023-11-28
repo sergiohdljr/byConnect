@@ -62,7 +62,6 @@ export default {
         data: dataFormatada,
         user: this.user,
       };
-      console.log(novaPublicacao);
       if (!novaPublicacao.foto) {
         novaPublicacao.foto = "";
       }

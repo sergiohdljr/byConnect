@@ -65,8 +65,12 @@ export default {
       state.users = users;
     },
     FILTER_USERS_LIST(state, search) {
+      if (search === "") {
+        return;
+      }
+
       state.users = state.users.filter((user) =>
-        user.username.toLowerCase().startsWith(search.toLowerCase())
+        user.email.toLowerCase().startsWith(search.toLowerCase())
       );
     },
     SET_POSTS(state, posts) {

@@ -6,7 +6,7 @@
         label="Busque um usuário"
         required
       ></v-text-field>
-      <v-btn type="submit"> Buscar </v-btn>
+      <v-btn type="submit" :loading="loadingSearch"> Buscar </v-btn>
       <v-btn type="button" @click="limparBusca"> limpar </v-btn>
     </v-form>
     <h2 class="font-weight-light" v-if="!searchQuery">todos os usuários:</h2>
@@ -47,27 +47,16 @@ export default {
   },
   methods: {
     searchUser() {
-      this.$router.push(`/Users?search=${this.searchValue}`);
-      if (this.$route.query.search) {
-        this.$store.dispatch("filtrar", this.$route.query.search);
-        this.users = this.getAllUsers;
-      } else {
-        return;
-      }
+      this.$store.dispatch("filtrar", this.searchValue);
     },
     limparBusca() {
-      this.users = this.usersListClone;
+      this.$store.dispatch("fetchAllUsers");
+      this.searchValue = "";
     },
   },
   mounted() {
     this.$store.dispatch("fetchAllUsers");
   },
-  /*created() {
-    const currentUser = this.$store.state.auth.user;
-    this.$store.dispatch("setUser", currentUser);
-    this.users = this.getAllUsers;
-    this.usersListClone = this.getAllUsers;
-  },*/
 };
 </script>
 

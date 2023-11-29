@@ -35,7 +35,7 @@ export default {
     return {
       user: {
         nome: auth.currentUser.displayName,
-        username: auth.currentUser.email,
+        email: auth.currentUser.email,
         fotoPerfil: auth.currentUser.photoURL,
       },
     };
@@ -62,7 +62,6 @@ export default {
         data: dataFormatada,
         user: this.user,
       };
-
       if (!novaPublicacao.foto) {
         novaPublicacao.foto = "";
       }

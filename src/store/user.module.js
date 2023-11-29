@@ -1,13 +1,14 @@
+import { api } from "@/config/axios";
 import { db } from "@/config/firebase";
 import {
-  doc,
-  setDoc,
-  updateDoc,
+  //doc,
+  //setDoc,
+  //updateDoc,
   deleteDoc,
   collection,
   getDocs,
-  orderBy,
-  query,
+  // orderBy,
+  //query,
 } from "firebase/firestore";
 
 export default {
@@ -75,8 +76,7 @@ export default {
   actions: {
     async post({ commit }, post) {
       try {
-        const postRef = doc(db, "posts", post.id);
-        await setDoc(postRef, post);
+        await api.post("post/", post);
         commit("ADD_POST", post);
       } catch (error) {
         throw new Error(error);
@@ -84,7 +84,7 @@ export default {
     },
     async delete({ commit }, id) {
       try {
-        await deleteDoc(doc(db, "posts", id));
+        await api.delete(`post-delete/${id}`);
         commit("DELETE_POST", id);
       } catch (error) {
         throw new Error(error);
@@ -92,8 +92,7 @@ export default {
     },
     async editar({ commit }, payload) {
       try {
-        const postRef = doc(db, "posts", payload.id);
-        await updateDoc(postRef, payload);
+        await api.put(`post-update/${payload.id}`, payload);
         commit("EDIT_POST", payload);
       } catch (error) {
         throw new Error(error.message);
@@ -110,13 +109,8 @@ export default {
     },
     async fetchPosts({ commit }) {
       try {
-        const consulta = query(
-          collection(db, "posts"),
-          orderBy("data", "desc")
-        );
-        const querySnapShot = await getDocs(consulta);
-        const posts = querySnapShot.docs.map((doc) => doc.data());
-        commit("SET_POSTS", posts);
+        const { data } = await api.get("posts");
+        commit("SET_POSTS", data);
       } catch (error) {
         throw new Error(error.message);
       }

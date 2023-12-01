@@ -18,9 +18,12 @@
 
     <v-card-actions>
       <v-list-item class="grow">
-        <v-list-item-avatar color="grey darken-3">
-          <v-img class="elevation-6" alt="" :src="profilePic"></v-img>
-        </v-list-item-avatar>
+        <router-link :to="`/User-profile/${postData.user.email}`">
+          <v-list-item-avatar color="grey darken-3">
+            <v-img class="elevation-6" alt="" :src="profilePic" />
+          </v-list-item-avatar>
+        </router-link>
+
         <v-list-item-content>
           <v-list-item-title class="h1">{{
             postData.user.nome

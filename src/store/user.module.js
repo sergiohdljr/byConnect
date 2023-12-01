@@ -37,10 +37,22 @@ export default {
       state.feed = state.feed.filter((post) => post.id !== id);
     },
     EDIT_POST(state, payload) {
-      const { id, texto } = payload;
+      const { id, texto, foto } = payload;
       const post = state.feed.find((post) => post.id === id);
-      if (post) {
+      if (texto && !foto) {
         post.texto = texto;
+        return;
+      }
+
+      if (!texto && foto) {
+        post.foto = foto;
+        return;
+      }
+
+      if (texto && foto) {
+        post.texto = texto;
+        post.foto = foto;
+        return;
       }
     },
     // eslint-disable-next-line no-unused-vars

@@ -88,6 +88,19 @@ export default {
     SET_POSTS(state, posts) {
       state.feed = posts;
     },
+    LIKE(state, payload) {
+      const { id, userId } = payload;
+      const post = state.feed.filter((post) => post.id === id);
+      const likedBy = post[0].likedBy;
+
+      if (!likedBy.includes(userId)) {
+        post[0].likes++;
+        likedBy.push(userId);
+      } else {
+        post[0].likes--;
+        post[0].likedBy = likedBy.filter((user) => user !== userId);
+      }
+    },
   },
   actions: {
     async post({ commit }, post) {
@@ -98,6 +111,18 @@ export default {
         throw new Error(error);
       }
     },
+    // eslint-disable-next-line no-unused-vars
+    async likePost({ commit }, payload) {
+      // eslint-disable-next-line no-unused-vars
+      const { id, userId } = payload;
+      try {
+        await api.put(`/post/like/${id}`, { userId });
+        commit("LIKE", { id, userId });
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+
     async delete({ commit }, id) {
       try {
         await api.delete(`post-delete/${id}`);
@@ -109,7 +134,7 @@ export default {
     async editar({ commit }, payload) {
       try {
         await api.put(`post-update/${payload.id}`, payload);
-        commit("EDIT_POST", payload);
+        commit("EDIT_POST", payload.id);
       } catch (error) {
         throw new Error(error.message);
       }

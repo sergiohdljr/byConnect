@@ -43,6 +43,20 @@
         </v-row>
       </v-list-item>
     </v-card-actions>
+    <div
+      style="
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      "
+    >
+      <p>{{ likesNumber }}</p>
+      <div class="actions" style="display: flex; gap: 0.2rem">
+        <button @click="like">like</button>
+        <button>comentarios</button>
+      </div>
+    </div>
   </v-card>
 </template>
 
@@ -59,11 +73,25 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    like() {
+      const payload = {
+        id: this.postData.id,
+        userId: this.postData.user.email,
+      };
+      this.$store.dispatch("likePost", payload);
+    },
+  },
   computed: {
     profilePic() {
       return this.postData.user.fotoPerfil
         ? this.postData.user.fotoPerfil
         : "https://cpsfoundation.org/wp-content/uploads/headshot-white.png";
+    },
+    likesNumber() {
+      return this.postData.likes === 0
+        ? "Nenhuma curtida"
+        : `${this.postData.likes} curtidas`;
     },
   },
 };

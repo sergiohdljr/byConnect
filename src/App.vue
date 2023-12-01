@@ -75,6 +75,7 @@ li {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+  color: inherit !important;
 }
 </style>

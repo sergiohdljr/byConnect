@@ -18,16 +18,16 @@
 
     <v-card-actions>
       <v-list-item class="grow">
-        <router-link :to="`/User-profile/${postData.user.email}`">
-          <v-list-item-avatar color="grey darken-3">
-            <v-img class="elevation-6" alt="" :src="profilePic" />
-          </v-list-item-avatar>
-        </router-link>
+        <v-list-item-avatar color="grey darken-3">
+          <v-img class="elevation-6" alt="" :src="profilePic" />
+        </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title class="h1">{{
-            postData.user.nome
-          }}</v-list-item-title>
+          <v-list-item-title class="h1">
+            <router-link :to="`/User-profile/${postData.user.email}`">
+              {{ postData.user.nome }}
+            </router-link>
+          </v-list-item-title>
           <v-list-item-title class="light-gray">{{
             postData.user.email
           }}</v-list-item-title>

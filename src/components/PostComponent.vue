@@ -26,7 +26,7 @@
             postData.user.nome
           }}</v-list-item-title>
           <v-list-item-title class="light-gray">{{
-            postData.user.username
+            postData.user.email
           }}</v-list-item-title>
         </v-list-item-content>
         <v-row

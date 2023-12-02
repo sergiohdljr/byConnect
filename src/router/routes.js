@@ -65,4 +65,10 @@ export const routes = [
     component: routesViews.ChangePassword,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/news",
+    name: "news",
+    component: routesViews.News,
+    meta: { requiresAuth: true },
+  },
 ];

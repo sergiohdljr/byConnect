@@ -10,4 +10,5 @@ export const routesViews = {
   UpdateUser: () => import("../views/UpdateUserView.vue"),
   RegisterComplement: () => import("../views/RegisterComplement.vue"),
   ChangePassword: () => import("../views/ChangePassword.vue"),
+  News: () => import("../views/NewsView.vue"),
 };

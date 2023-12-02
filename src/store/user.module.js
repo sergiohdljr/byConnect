@@ -101,6 +101,11 @@ export default {
         post[0].likedBy = likedBy.filter((user) => user !== userId);
       }
     },
+    COMMENT_POST(state, payload) {
+      const { id } = payload;
+      const [post] = state.feed.filter((post) => post.id === id);
+      post.coments.push(payload);
+    },
   },
   actions: {
     async post({ commit }, post) {
@@ -111,15 +116,24 @@ export default {
         throw new Error(error);
       }
     },
-    // eslint-disable-next-line no-unused-vars
+
     async likePost({ commit }, payload) {
-      // eslint-disable-next-line no-unused-vars
       const { id, userId } = payload;
       try {
         await api.put(`/post/like/${id}`, { userId });
         commit("LIKE", { id, userId });
       } catch (error) {
         throw new Error(error);
+      }
+    },
+
+    async commentPost({ commit }, payload) {
+      const { id } = payload;
+      try {
+        commit("COMMENT_POST", payload);
+        await api.put(`post/comment/${id}`, payload);
+      } catch (error) {
+        throw new Error(`error:${error}`);
       }
     },
 

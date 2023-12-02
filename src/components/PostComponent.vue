@@ -54,8 +54,22 @@
       <p>{{ likesNumber }}</p>
       <div class="actions" style="display: flex; gap: 0.2rem">
         <button @click="like">like</button>
-        <button>comentarios</button>
+        <button @click="comment">comentarios</button>
       </div>
+      <ul>
+        <li v-for="coment in postData.coments" :key="coment.comentId">
+          {{ coment.textoComentario }}
+        </li>
+        <v-form @submit.prevent="comment">
+          <v-text-field
+            label="Escreva um comentario"
+            placeholder="Escreva um comentario"
+            outlined
+            v-model="textoComentario"
+          />
+          <button type="submit">comentar</button>
+        </v-form>
+      </ul>
     </div>
   </v-card>
 </template>
@@ -71,7 +85,9 @@ export default {
     allowActions: Boolean,
   },
   data() {
-    return {};
+    return {
+      textoComentario: "",
+    };
   },
   methods: {
     like() {
@@ -80,6 +96,15 @@ export default {
         userId: this.postData.user.email,
       };
       this.$store.dispatch("likePost", payload);
+    },
+    comment() {
+      const payload = {
+        id: this.postData.id,
+        textoComentario: this.textoComentario,
+        user: this.postData.user,
+      };
+
+      this.$store.dispatch("commentPost", payload);
     },
   },
   computed: {

@@ -44,17 +44,20 @@
       </v-list-item>
     </v-card-actions>
     <div style="display: flex; flex-direction: column; gap: 0.2rem">
-      <p class="mb-0" style="padding: 8px">
-        {{ likesNumber }}
-      </p>
       <div class="actions" style="padding: 8px; display: flex">
-        <v-btn @click="like" icon>
-          <v-icon small>mdi-thumb-up-outline</v-icon>
-        </v-btn>
+        <div>
+          <v-btn @click="like" icon>
+            <v-icon :class="liked" small>mdi-thumb-up-outline</v-icon>
+          </v-btn>
+          <span>{{ likesNumber }}</span>
+        </div>
 
-        <v-btn @click="openComents" icon depressed>
-          <v-icon small>mdi-comment-multiple-outline</v-icon>
-        </v-btn>
+        <div>
+          <v-btn @click="openComents" icon depressed>
+            <v-icon small>mdi-comment-multiple-outline</v-icon>
+          </v-btn>
+          <span>{{ postData.coments?.length }}</span>
+        </div>
       </div>
       <div v-if="showCommentarios">
         <CommentsList
@@ -71,7 +74,7 @@
             v-model="textoComentario"
           >
           </v-text-field>
-          <v-btn @click="comment" type="submit">comentar</v-btn>
+          <v-btn @click="comment">comentar</v-btn>
         </form>
       </div>
     </div>
@@ -99,8 +102,9 @@ export default {
     like() {
       const payload = {
         id: this.postData.id,
-        userId: this.postData.user.email,
+        userId: this.$store.state.auth.user.email,
       };
+
       this.$store.dispatch("likePost", payload);
     },
     openComents() {
@@ -110,7 +114,11 @@ export default {
       const payload = {
         id: this.postData.id,
         textoComentario: this.textoComentario,
-        user: this.postData.user,
+        user: {
+          nome: this.$store.state.auth.user.displayName,
+          fotoPerfil: this.$store.state.auth.user.photoURL,
+          email: this.$store.state.auth.user.email,
+        },
       };
       this.$store.dispatch("commentPost", payload);
     },
@@ -122,9 +130,12 @@ export default {
         : "https://cpsfoundation.org/wp-content/uploads/headshot-white.png";
     },
     likesNumber() {
-      return this.postData.likes === 0
-        ? "Nenhuma curtida"
-        : `${this.postData.likes} curtidas`;
+      return this.postData.likes === 0 ? 0 : `${this.postData.likes} `;
+    },
+    liked() {
+      return this.postData.likedBy?.includes(this.$store.state.auth.user.email)
+        ? "primary--text"
+        : "";
     },
   },
 };

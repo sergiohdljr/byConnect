@@ -60,6 +60,9 @@ export default {
         foto: dados.img,
         horario,
         data: dataFormatada,
+        coments: [],
+        likes: 0,
+        likedBy: [],
         user: this.user,
       };
       if (!novaPublicacao.foto) {

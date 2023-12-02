@@ -92,6 +92,11 @@ export default {
           icon: "mdi-cog",
           redirect: `/Configuration`,
         },
+        {
+          title: "Noticias",
+          icon: "mdi-newspaper-variant-multiple-outline",
+          redirect: "/news",
+        },
       ],
     };
   },

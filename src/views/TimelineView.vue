@@ -5,7 +5,7 @@
     <PostComponent
       v-for="(publi, index) in getAllPosts"
       :post-data="publi"
-      :allow-actions="publi.user.username === user.username"
+      :allow-actions="publi.user.email === user.email"
       :delete-post="deletePost"
       :edit-post="editPost"
       :key="index"

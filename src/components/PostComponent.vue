@@ -43,33 +43,37 @@
         </v-row>
       </v-list-item>
     </v-card-actions>
-    <div
-      style="
-        padding-left: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-      "
-    >
-      <p>{{ likesNumber }}</p>
-      <div class="actions" style="display: flex; gap: 0.2rem">
-        <button @click="like">like</button>
-        <button @click="comment">comentarios</button>
+    <div style="display: flex; flex-direction: column; gap: 0.2rem">
+      <p class="mb-0" style="padding: 8px">
+        {{ likesNumber }}
+      </p>
+      <div class="actions" style="padding: 8px; display: flex">
+        <v-btn @click="like" icon>
+          <v-icon small>mdi-thumb-up-outline</v-icon>
+        </v-btn>
+
+        <v-btn @click="openComents" icon depressed>
+          <v-icon small>mdi-comment-multiple-outline</v-icon>
+        </v-btn>
       </div>
-      <ul>
-        <li v-for="coment in postData.coments" :key="coment.comentId">
-          {{ coment.textoComentario }}
-        </li>
-        <v-form @submit.prevent="comment">
+      <div v-if="showCommentarios">
+        <CommentsList
+          v-if="showCommentarios"
+          :lista-comentarios="postData.coments"
+        />
+        <form style="padding: 8px">
           <v-text-field
+            single-line
             label="Escreva um comentario"
             placeholder="Escreva um comentario"
             outlined
+            height="50px"
             v-model="textoComentario"
-          />
-          <button type="submit">comentar</button>
-        </v-form>
-      </ul>
+          >
+          </v-text-field>
+          <v-btn @click="comment" type="submit">comentar</v-btn>
+        </form>
+      </div>
     </div>
   </v-card>
 </template>
@@ -77,9 +81,10 @@
 <script>
 import EditDialogComponent from "./Dialogs/EditDialogComponent";
 import DeleteDialog from "./Dialogs/DeleteDialog";
+import CommentsList from "./CommentsList.vue";
 
 export default {
-  components: { EditDialogComponent, DeleteDialog },
+  components: { EditDialogComponent, DeleteDialog, CommentsList },
   props: {
     postData: Object,
     allowActions: Boolean,
@@ -87,6 +92,7 @@ export default {
   data() {
     return {
       textoComentario: "",
+      showCommentarios: false,
     };
   },
   methods: {
@@ -97,13 +103,15 @@ export default {
       };
       this.$store.dispatch("likePost", payload);
     },
+    openComents() {
+      this.showCommentarios = !this.showCommentarios;
+    },
     comment() {
       const payload = {
         id: this.postData.id,
         textoComentario: this.textoComentario,
         user: this.postData.user,
       };
-
       this.$store.dispatch("commentPost", payload);
     },
   },

@@ -138,7 +138,7 @@ export default {
     },
     async editar({ commit }, payload) {
       try {
-        //await api.put(`post-update/${payload.id}`, payload);
+        await api.put(`post-update/${payload.id}`, payload);
         commit("EDIT_POST", payload);
       } catch (error) {
         throw new Error(error.message);

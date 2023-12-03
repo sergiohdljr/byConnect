@@ -97,6 +97,11 @@ export default {
       const [post] = state.feed.filter((post) => post.id === id);
       post.coments.push(payload);
     },
+    DELETE_COMMENT_POST(state, payload) {
+      const { postId, id } = payload;
+      const [post] = state.feed.filter((post) => post.id === postId);
+      post.coments = post.coments.filter((coments) => coments.comentId !== id);
+    },
   },
   actions: {
     async post({ commit }, post) {
@@ -125,6 +130,16 @@ export default {
         await api.put(`post/comment/${id}`, payload);
       } catch (error) {
         throw new Error(`error:${error}`);
+      }
+    },
+
+    async deleteCommentPost({ commit }, payload) {
+      const { postId, id } = payload;
+      try {
+        await api.delete(`post/comment-delete/${id}`, { postId });
+        commit("DELETE_COMMENT_POST", payload);
+      } catch (error) {
+        throw new Error(error);
       }
     },
 

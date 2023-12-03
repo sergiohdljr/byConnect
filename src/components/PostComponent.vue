@@ -62,6 +62,7 @@
       <div v-if="showCommentarios">
         <CommentsList
           v-if="showCommentarios"
+          :post-id="postData.id"
           :lista-comentarios="postData.coments"
         />
         <form style="padding: 8px">

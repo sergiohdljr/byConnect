@@ -40,7 +40,7 @@
         </v-btn>
         <v-btn
           color="green darken-1"
-          :disabled="texto.length === 0 || !imageURL"
+          :disabled="texto.length === 0"
           text
           @click="EditarPost"
         >

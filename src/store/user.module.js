@@ -1,15 +1,6 @@
 import { api } from "@/config/axios";
 import { db } from "@/config/firebase";
-import {
-  //doc,
-  //setDoc,
-  //updateDoc,
-  deleteDoc,
-  collection,
-  getDocs,
-  // orderBy,
-  //query,
-} from "firebase/firestore";
+import { deleteDoc, collection, getDocs } from "firebase/firestore";
 
 export default {
   namespace: true,
@@ -39,9 +30,9 @@ export default {
     EDIT_POST(state, payload) {
       const { id, texto, foto } = payload;
       const post = state.feed.find((post) => post.id === id);
+
       if (texto && !foto) {
         post.texto = texto;
-        return;
       }
 
       if (!texto && foto) {
@@ -147,8 +138,8 @@ export default {
     },
     async editar({ commit }, payload) {
       try {
-        await api.put(`post-update/${payload.id}`, payload);
-        commit("EDIT_POST", payload.id);
+        //await api.put(`post-update/${payload.id}`, payload);
+        commit("EDIT_POST", payload);
       } catch (error) {
         throw new Error(error.message);
       }

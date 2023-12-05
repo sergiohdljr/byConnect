@@ -133,11 +133,20 @@ export default {
       }
     },
 
-    async deleteCommentPost({ commit }, payload) {
+    async deleteCommentPost({ commit, dispatch }, payload) {
       const { postId, id } = payload;
+      const url = "https://api-beyond-nc2crzlxga-uc.a.run.app/api/v1/";
+      const options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postId }),
+      };
       try {
-        await api.delete(`post/comment-delete/${id}`, { postId });
-        commit("DELETE_COMMENT_POST", payload);
+        await dispatch("fetchPosts");
+        await fetch(`${url}post/comment-delete/${id}`, options),
+          commit("DELETE_COMMENT_POST", payload);
       } catch (error) {
         throw new Error(error);
       }

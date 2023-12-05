@@ -41,7 +41,7 @@ export default {
     this.posts = this.getAllPosts;
 
     const userPosts = this.getAllPosts.filter(
-      (post) => post.user.username === this.$route.params.username
+      (post) => post.user.email === this.$route.params.username
     );
 
     this.posts = userPosts;

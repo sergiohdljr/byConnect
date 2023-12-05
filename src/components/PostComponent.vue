@@ -103,7 +103,7 @@ export default {
     like() {
       const payload = {
         id: this.postData.id,
-        userId: this.$store.state.auth.user.email,
+        userId: this.$store.state.auth.user?.email,
       };
 
       this.$store.dispatch("likePost", payload);
@@ -116,9 +116,9 @@ export default {
         id: this.postData.id,
         textoComentario: this.textoComentario,
         user: {
-          nome: this.$store.state.auth.user.displayName,
-          fotoPerfil: this.$store.state.auth.user.photoURL,
-          email: this.$store.state.auth.user.email,
+          nome: this.$store.state.auth.user?.displayName,
+          fotoPerfil: this.$store.state.auth?.user.photoURL,
+          email: this.$store.state.auth.user?.email,
         },
       };
       this.$store.dispatch("commentPost", payload);
@@ -134,7 +134,7 @@ export default {
       return this.postData.likes === 0 ? 0 : `${this.postData.likes} `;
     },
     liked() {
-      return this.postData.likedBy?.includes(this.$store.state.auth.user.email)
+      return this.postData.likedBy?.includes(this.$store.state.auth.user?.email)
         ? "primary--text"
         : "";
     },

@@ -36,6 +36,7 @@
                   @change="getImageUrl"
                   v-model="image"
                 ></v-file-input>
+                <span v-if="image">{{ textoLoading }}</span>
               </v-col>
             </v-row>
           </v-card-text>
@@ -86,6 +87,7 @@ export default {
   data() {
     return {
       actualUser: this.$store.state.auth.user,
+      textoLoading: "Imagem Carregada com sucesso!!!",
       image: null,
       imageURL: null,
       imageReady: false,

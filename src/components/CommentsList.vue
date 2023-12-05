@@ -20,7 +20,8 @@
         <v-btn
           @click="deletarComentario(item)"
           icon
-          v-if="$store.state.auth.user.email === item.user.email"
+          :loading="loadingDeletePost"
+          v-if="$store.state.auth.user?.email === item.user.email"
         >
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
@@ -31,6 +32,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      loadingDeletePost: false,
+    };
+  },
   props: {
     listaComentarios: Array,
     postId: String,

@@ -68,6 +68,14 @@
             </v-btn>
             <span>{{ postData.coments?.length }}</span>
           </div>
+          <div>
+            <v-btn icon>
+              <v-icon style="font-size: 19px; margin-bottom: 3px"
+                >mdi-share-outline</v-icon
+              >
+            </v-btn>
+            <span>2</span>
+          </div>
         </div>
         <div v-if="showCommentarios">
           <CommentsList

@@ -4,7 +4,7 @@
       <v-icon color="#808080">mdi-share</v-icon>
       <span style="font-size: 13px; opacity: 0.8; color: gray">
         <router-link :to="`/User-profile/${postData.user.email}`">
-          {{ postData.sharedBy }} compartilhou
+          {{ postData.sharedBy }} 
         </router-link>
       </span>
     </div>

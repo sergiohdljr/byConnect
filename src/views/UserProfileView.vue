@@ -24,6 +24,8 @@ export default {
     const userRef = doc(db, "users", this.$route.params.username);
     const userSnap = await getDoc(userRef);
     this.user = userSnap.data();
+
+    document.title = `byConnect - ${this.user.displayName}`;
   },
 };
 </script>

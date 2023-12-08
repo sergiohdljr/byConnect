@@ -33,7 +33,7 @@
         <v-list v-for="(item, index) in items" :key="index" dense>
           <v-list-item link>
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon color="primary">{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
@@ -45,7 +45,7 @@
         </v-list>
         <v-list class="logout-btn">
           <button @click="Logout">
-            <v-icon>mdi-logout</v-icon>
+            <v-icon color="primary">mdi-logout</v-icon>
             <p>Sair</p>
           </button>
         </v-list>

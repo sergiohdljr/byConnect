@@ -91,9 +91,16 @@
               outlined
               height="50px"
               v-model="textoComentario"
+              @submit.prevent="comment"
             >
             </v-text-field>
-            <v-btn @click="comment">comentar</v-btn>
+            <v-btn
+              type="submit"
+              color="primary"
+              rounded
+              class="custom-transform-class text-none mt-1"
+              >Comentar</v-btn
+            >
           </form>
         </div>
       </div>

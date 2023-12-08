@@ -12,10 +12,10 @@
               {{ item.user.nome }}
             </router-link>
           </v-list-item-title>
-          <v-list-item-title>{{ item.user.email }} </v-list-item-title>
-          <v-list-item-subtitle
-            ><span>{{ item.textoComentario }}</span>
-          </v-list-item-subtitle>
+          <v-list-item-subtitle>{{ item.user.email }} </v-list-item-subtitle>
+          <v-list-item-title>
+            <span>{{ item.textoComentario }}</span>
+          </v-list-item-title>
         </v-list-item-content>
         <v-btn
           @click="deletarComentario(item)"

@@ -1,14 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        outlined
-        color="primary"
-        class="rounded-pill action-button"
-        dark
-        v-bind="attrs"
-        v-on="on"
-      >
+      <v-btn color="primary" icon dark v-bind="attrs" v-on="on">
         <v-icon class="p-0">mdi-pencil</v-icon>
       </v-btn>
     </template>

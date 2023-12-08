@@ -1,5 +1,15 @@
 <template>
   <v-form class="form" ref="form" lazy-validation @submit.prevent="Register">
+    <picture
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <img src="../../public/logo.png" width="200" height="200" />
+    </picture>
     <h3 class="text-h4">Registre-se</h3>
     <v-alert v-if="registerError" outlined type="error">
       {{ registerError }}

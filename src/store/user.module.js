@@ -152,6 +152,16 @@ export default {
       }
     },
 
+    async compartilharPost({ commit }, payload) {
+      const { userId, post } = payload;
+
+      try {
+        await api.post(`/post/share/${userId}`, post);
+        commit("ADD_POST", { ...post, sharedBy: userId });
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
     async delete({ commit }, id) {
       try {
         await api.delete(`post-delete/${id}`);

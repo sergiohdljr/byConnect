@@ -70,11 +70,12 @@
           </div>
           <div>
             <v-btn icon>
-              <v-icon style="font-size: 19px; margin-bottom: 3px"
+              <v-icon
+                @click="compartilhar"
+                style="font-size: 19px; margin-bottom: 3px"
                 >mdi-share-outline</v-icon
               >
             </v-btn>
-            <span>2</span>
           </div>
         </div>
         <div v-if="showCommentarios">
@@ -112,6 +113,7 @@
 import EditDialogComponent from "./Dialogs/EditDialogComponent";
 import DeleteDialog from "./Dialogs/DeleteDialog";
 import CommentsList from "./CommentsList.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   components: { EditDialogComponent, DeleteDialog, CommentsList },
@@ -148,6 +150,16 @@ export default {
         },
       };
       this.$store.dispatch("commentPost", payload);
+    },
+    compartilhar() {
+      const payload = {
+        userId: this.$store.state.auth.user.email,
+        post: this.postData,
+      };
+
+      payload.post.id = uuidv4();
+
+      this.$store.dispatch("compartilharPost", payload);
     },
   },
   computed: {

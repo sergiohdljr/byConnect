@@ -14,14 +14,12 @@
         <span class="subtitle-1 light-gray">{{ postData.horario }}</span>
         <span class="subtitle-1 light-gray">{{ postData.data }}</span>
       </v-card-title>
-      <v-card-title v-if="postData.texto.length > 0 || postData.texto">
-        <span
-          v-if="postData.texto.length > 0 || postData.texto"
-          style="hyphens: auto"
-          class="h-6 font-weight-regular"
-          >{{ postData.texto }}
-        </span>
-      </v-card-title>
+      <p
+        class="justify-text"
+        v-if="postData.texto.length > 0 || postData.texto"
+      >
+        {{ postData.texto }}
+      </p>
       <v-list-item v-if="postData.foto">
         <v-img v-if="postData.foto" width="100%" :src="postData.foto"></v-img>
       </v-list-item>
@@ -182,5 +180,14 @@ export default {
 <style>
 .light-gray {
   color: gray !important;
+}
+.justify-text {
+  text-align: justify;
+  hyphens: none !important;
+  hyphenate-character: inherit;
+  margin: 0 !important;
+  padding: 16px;
+  font-size: 1.3rem;
+  font-weight: 400;
 }
 </style>

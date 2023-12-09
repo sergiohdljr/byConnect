@@ -84,7 +84,7 @@
             :post-id="postData.id"
             :lista-comentarios="postData.coments"
           />
-          <form style="padding: 8px">
+          <form style="padding: 8px" @submit.prevent="comment">
             <v-text-field
               single-line
               label="Escreva um comentario"
@@ -92,7 +92,6 @@
               outlined
               height="50px"
               v-model="textoComentario"
-              @submit.prevent="comment"
             >
             </v-text-field>
             <v-btn

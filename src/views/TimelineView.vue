@@ -3,12 +3,12 @@
     <ScrollButton />
     <FormPostComponent @Post="publicar" />
     <PostComponent
-      v-for="(publi, index) in getAllPosts"
+      v-for="publi in getAllPosts"
       :post-data="publi"
       :allow-actions="publi.user.email === user.email"
       :delete-post="deletePost"
       :edit-post="editPost"
-      :key="index"
+      :key="publi.id"
     />
     <NoPostComponent v-if="getAllPosts.length === 0" />
   </div>

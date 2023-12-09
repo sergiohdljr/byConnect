@@ -1,14 +1,9 @@
 <template>
   <div>
-    <div v-if="postData.sharedBy">
-      <v-icon color="#808080">mdi-share</v-icon>
-      <span style="font-size: 13px; opacity: 0.8; color: gray">
-        <router-link :to="`/User-profile/${postData.user.email}`">
-          {{ postData.sharedBy }} compartilhou
-        </router-link>
-      </span>
-    </div>
-
+    <sharedComponentVue
+      v-if="postData.sharedBy"
+      :shared-by="postData.sharedBy"
+    />
     <v-card class="mx-auto" outlined width="100%" style="margin-bottom: 1rem">
       <v-card-title class="d-flex justify-space-between">
         <span class="subtitle-1 light-gray">{{ postData.horario }}</span>
@@ -51,7 +46,10 @@
           </v-row>
         </v-list-item>
       </v-card-actions>
-      <div style="display: flex; flex-direction: column; gap: 0.2rem">
+      <div
+        v-if="!postData.sharedBy"
+        style="display: flex; flex-direction: column; gap: 0.2rem"
+      >
         <div class="actions" style="padding: 8px; display: flex">
           <div>
             <v-btn @click="like" icon>
@@ -110,10 +108,16 @@
 import EditDialogComponent from "./Dialogs/EditDialogComponent";
 import DeleteDialog from "./Dialogs/DeleteDialog";
 import CommentsList from "./CommentsList.vue";
+import sharedComponentVue from "./sharedComponent.vue";
 import { v4 as uuidv4 } from "uuid";
 
 export default {
-  components: { EditDialogComponent, DeleteDialog, CommentsList },
+  components: {
+    EditDialogComponent,
+    DeleteDialog,
+    CommentsList,
+    sharedComponentVue,
+  },
   props: {
     postData: Object,
     allowActions: Boolean,

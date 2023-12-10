@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h3>{{ $route.params.username }}:</h3>
     <div class="title">
       <v-icon color="primary">mdi-post</v-icon>
       <h3>Postados:</h3>

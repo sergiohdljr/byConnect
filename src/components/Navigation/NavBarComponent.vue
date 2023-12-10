@@ -2,19 +2,20 @@
   <div>
     <v-toolbar fixed elevation="5" height="80px">
       <div class="manu-wrapper">
-        <v-btn @click.stop="drawer = !drawer">
+        <v-btn icon @click.stop="drawer = !drawer">
           <v-icon>mdi-menu-open</v-icon>
         </v-btn>
+        <div @click="backToTimeline" role="button" class="logo-nav">
+          <img class="icon" src="../../assets/logo.png" alt="logo" />
+        </div>
         <div class="swish-theme">
           <v-switch
             v-model="$vuetify.theme.dark"
             :append-icon="themeIcon"
             inset
-          >
-          </v-switch>
+          />
         </div>
       </div>
-      <ButtonDeleteAll v-if="isOnTimeline" :delete-all="deleteAllPosts" />
     </v-toolbar>
     <v-sheet height="100%" width="344" class="overflow-hidden">
       <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -55,12 +56,7 @@
 </template>
 
 <script>
-import ButtonDeleteAll from "../ButtonDeleteAll.vue";
-
 export default {
-  components: {
-    ButtonDeleteAll,
-  },
   props: {
     user: Object,
     deleteAllPosts: Function,
@@ -114,6 +110,9 @@ export default {
     Logout() {
       this.$store.dispatch("logout");
     },
+    backToTimeline() {
+      if (this.$route.path !== "/") this.$router.push("/");
+    },
   },
 };
 </script>
@@ -155,5 +154,26 @@ export default {
 .link-style {
   color: white;
   text-decoration: none !important;
+}
+
+.logo-nav {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  -webkit-filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
+  filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
 }
 </style>

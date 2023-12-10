@@ -1,11 +1,26 @@
 <template>
-  <div>
-    <h2 class="font-weight-light">
-      Todos os posts do usuário {{ $route.params.username }}:
-    </h2>
+  <div class="container">
+    <h3>{{ $route.params.username }}:</h3>
+    <div class="title">
+      <v-icon color="primary">mdi-post</v-icon>
+      <h3>Postados:</h3>
+    </div>
+
     <PostComponent
-      v-for="(post, index) in posts"
-      :key="index"
+      v-for="post in posts"
+      :key="post.id"
+      :post-data="post"
+      :delete-post="deletePost"
+      :edit-post="editPost"
+    />
+    <div class="title">
+      <v-icon color="primary">mdi-share</v-icon>
+      <h3>Compartilhados:</h3>
+    </div>
+
+    <PostComponent
+      v-for="post in shared"
+      :key="post.id"
       :post-data="post"
       :delete-post="deletePost"
       :edit-post="editPost"
@@ -23,7 +38,8 @@ export default {
   },
   data() {
     return {
-      posts: "",
+      posts: [],
+      shared: [],
     };
   },
   methods: {
@@ -38,13 +54,32 @@ export default {
     ...mapGetters(["getAllPosts"]),
   },
   created() {
-    this.posts = this.getAllPosts;
-
     const userPosts = this.getAllPosts.filter(
       (post) => post.user.email === this.$route.params.username
     );
 
-    this.posts = userPosts;
+    const posts = userPosts.filter((post) => !post?.sharedBy);
+
+    const shared = userPosts.filter(
+      (post) => post?.sharedBy === this.$route.params.username
+    );
+
+    this.posts = posts;
+    this.shared = shared;
   },
 };
 </script>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+</style>

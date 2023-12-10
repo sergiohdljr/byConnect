@@ -11,7 +11,7 @@
       >
         <v-card>
           <v-card-title class="text-h6">
-            <v-icon class="mr-2">mdi-account-cog</v-icon>
+            <v-icon color="primary" class="mr-2">mdi-account-cog</v-icon>
             {{ textoDialog }}
           </v-card-title>
 
@@ -46,18 +46,19 @@
 
             <v-btn
               v-if="!showVoltarBtn"
+              color="primary"
+              rounded
               outlined
-              color="red darken-1"
-              text
+              class="custom-transform-class text-none mt-1"
               @click="goBackToConfig"
             >
               Voltar
             </v-btn>
 
             <v-btn
-              outlined
-              color="green darken-1"
-              text
+              rounded
+              color="primary"
+              class="custom-transform-class text-none mt-1"
               type="submit"
               :loading="atualizandoLoading"
             >

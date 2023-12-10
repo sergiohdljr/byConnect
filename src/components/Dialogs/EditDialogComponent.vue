@@ -5,7 +5,7 @@
         <v-icon class="p-0">mdi-pencil</v-icon>
       </v-btn>
     </template>
-    <v-card class="outlined">
+    <v-card>
       <v-card-title>
         <span class="text-h5">Edite o seu Post</span>
       </v-card-title>
@@ -28,13 +28,21 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red darken-1" text @click="dialog = false">
+        <v-btn
+          outlined
+          rounded
+          color="primary"
+          text
+          class="custom-transform-class text-none mt-1"
+          @click="dialog = false"
+        >
           Cancelar
         </v-btn>
         <v-btn
-          color="green darken-1"
+          color="primary"
+          rounded
+          class="custom-transform-class text-none mt-1"
           :disabled="texto.length === 0"
-          text
           @click="EditarPost"
         >
           Salvar

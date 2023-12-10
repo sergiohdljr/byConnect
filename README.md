@@ -1,7 +1,10 @@
-# Rede Social 
+# byConnect 
 
-Projeto da Residência de Software do Porto Digital , com a Empresa Beyond CO. 
-que consiste no desenvolvimento de uma aplicação full-stack de uma rede social. 
+![logo](https://github.com/sergiohdljr/sergiohdljr/assets/102623806/751609a4-d4d6-4611-978e-a7abd5cfc91a)
+
+
+Repositório do byConnect um projeto da Residência de Software do Porto Digital, com a Empresa Beyond CO. 
+que consiste no desenvolvimento incremental e deploy de uma aplicação full-stack de uma rede social. 
 
 ## Stack : 
 ![JavaScript](https://img.shields.io/badge/-JavaScript-black?logo=javascript&style=social)&nbsp;&nbsp;
@@ -9,19 +12,4 @@ que consiste no desenvolvimento de uma aplicação full-stack de uma rede social
 ![NodeJS](https://img.shields.io/badge/-NodeJS-black?logo=node.js&style=social)&nbsp;&nbsp;
 ![Firebase](https://img.shields.io/badge/-firebase-black?logo=Firebase&style=social)&nbsp;&nbsp;
 
-## Como rodar o projeto localmente: 
-1. instale as dependências :
-```
-npm install
-```
-2. iniciar o projeto localmente :
-```
-npm run start:dev
-```
-
-### scripts:
-
-corrigir erros de padrão de código com o eslint + prettier:
-```
-npm run lint
-```
+🌐 [Acesse](https://projeto-beyond-8c339.web.app/)
